@@ -1,0 +1,7 @@
+[submodule "bs-solctra-mpi-rs"]
+	path = bs-solctra-mpi-rs
+	url = https://github.com/caschb/bs-solctra-mpi-rs
+[submodule "bs-solctra-implementations"]
+	path = bs-solctra-implementations
+	url = https://gitlab.com/CNCA_CeNAT/bs-solctra-implementations.git
+	branch = mpi_openmp
