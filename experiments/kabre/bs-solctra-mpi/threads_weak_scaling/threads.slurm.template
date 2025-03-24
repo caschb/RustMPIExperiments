@@ -1,0 +1,56 @@
+#!/bin/sh
+
+#SBATCH --job-name=bs-solctra-c-{nodes}
+#SBATCH --partition=kura-all
+#SBATCH --output=stdout-%x_%j
+#SBATCH --error=stderr-%x_%j
+# #SBATCH --mail-user=casch@cenat.ac.cr
+# #SBATCH --mail-type=END,FAIL
+#SBATCH --time=1-00:00:00
+
+#SBATCH --nodes={nodes}
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=40
+#SBATCH --exclusive
+
+
+. /opt/Modules/3.2.10/init/sh
+module purge
+# Load needed modules
+module load mpich/3.3.2-gcc-9.3.0
+module load gcc/9.3.0
+
+scontrol show job $SLURM_JOB_ID
+export LOG_DIR=./thread_runs_logs
+export OUTPUT_DIR=${LOG_DIR}/output_${SLURM_JOB_ID}
+
+export BASE_DIR=${HOME}/RustMPIExperiments/bs-solctra-implementations
+export EXECUTABLE=${BASE_DIR}/results/bs-solctra-multinode
+export PARTICLE_DATA=${HOME}/RustMPIExperiments/experiments/kabre/bs-solctra-mpi/input_big.txt
+export COIL_DATA=${BASE_DIR}/resources
+
+export ID=${SLURM_JOB_ID}
+
+if [ ! -d ${LOG_DIR} ]; then
+  mkdir ${LOG_DIR}
+fi
+
+for rep in {0..{reps}}
+do
+  for threadnum in 1 10 20 40
+  do
+  export OMP_NUM_THREADS=${threadnum}
+  srun --exclusive -o ${LOG_DIR}/stdout-%x_%j_${rep}_${threadnum}_{nodes} -e ${LOG_DIR}/stderr-%x_%j_${rep}_${threadnum}_{nodes} -N {nodes} --ntasks-per-node 1\
+   ${EXECUTABLE}\
+    -id ${ID}_${rep}\
+    -mode 1\
+    -magnetic_prof 0 100 0 2\
+    -print_type 1\
+    -resource ${COIL_DATA}\
+    -particles ${PARTICLE_DATA}\
+    -steps 1000\
+    -length 102400 &
+  done
+done
+
+wait
