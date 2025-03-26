@@ -23,7 +23,7 @@ module load mpich/3.3.2-gcc-9.3.0
 module load gcc/9.3.0
 
 scontrol show job ${SLURM_JOB_ID}
-export LOG_DIR=./weak_runs_logs
+export LOG_DIR=./strong_runs_logs
 export OUTPUT_DIR=${LOG_DIR}/output_${SLURM_JOB_ID}
 export RAYON_NUM_THREADS=40
 export RUST_LOG=info
