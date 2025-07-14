@@ -5,3 +5,7 @@
 	path = bs-solctra-implementations
 	url = https://gitlab.com/CNCA_CeNAT/bs-solctra-implementations.git
 	branch = mpi_openmp
+[submodule "Kernels"]
+	path = Kernels
+	url = https://github.com/caschb/Kernels.git
+	branch = mpi-rust-pic
