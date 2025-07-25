@@ -2,3 +2,7 @@ std*
 *_logs
 results*
 *csv
+sol-mpi-wk/
+sol-mpi-st/
+sol-rst-wk/
+sol-rst-st/
