@@ -242,6 +242,7 @@ ln -sf ~/RustMPIExperiments/bs-solctra-implementations/results/bs-solctra-multin
 #+begin_src bash :noweb-ref bsms-name
 #SBATCH --job-name solc-cpp-st
 #+end_src
+
 *** Execution commands
 
 #+begin_src bash :noweb-ref bsms-command
@@ -263,7 +264,6 @@ do
 	    -steps 1000
 done
 #+end_src
-
 
 *** Assemble Slurm files for strong scaling and copy files
 
@@ -389,6 +389,7 @@ do
 		  --mode 1\
 		  --magprof 0\
 		  --steps 1000\
+		  -w 10000\
 		  --output results_${SLURM_JOBID}${i}
 done
 #+end_src
@@ -516,7 +517,7 @@ spack env activate rustdev
 #+begin_src bash :noweb-ref bsrs-command
 export RAYON_NUM_THREADS=${SLURM_NTASKS_PER_NODE}
 TOTAL_PARTICLES=$((12*256))
-REPETITIONS = 10
+REPETITIONS=10
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
     RUST_LOG=info mpiexec -n ${SLURM_NNODES}\
@@ -527,10 +528,10 @@ do
 		  --mode 1\
 		  --magprof 0\
 		  --steps 1000\
-		  --output out_${SLURM_JOBID}_${i}
+		  -w 10000\
+		  --output results_${SLURM_JOBID}${i}
 done
 #+end_src
-
 
 *** Assemble Slurm files for weak scaling and copy files
 
@@ -577,7 +578,6 @@ source /work/casch/spack/share/spack/setup-env.sh
 spack env activate rustdev
 <<bsrs-command>>
 #+end_src
-
 
 **** 4 nodes
 
@@ -647,7 +647,6 @@ spack env activate rustdev
 #+end_src
 
 
-
 ** PIC C Weak Scaling
 
 *** Job Name
@@ -703,10 +702,8 @@ do
 	    ${TOTAL_PARTICLES}\
 	    1 0\
 	    PATCH\
-	    0\
-	    200\
-	    100\
-	    200
+	    0 200\
+	    100 200
 done
 #+end_src
 
@@ -1011,7 +1008,7 @@ do
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
 	 -t ${TOTAL_PARTICLES}\
-	 -p 1 -v 2\
+	 -p 0 -v 1\
 	 sinusoidal
     echo "###################################"
     echo "LINEAR" >&2
@@ -1020,7 +1017,7 @@ do
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
 	 -t ${TOTAL_PARTICLES}\
-	 -p 1 -v 2\
+	 -p 1 -v 0\
 	 linear\
 	 -n 1.0\
 	 -c 3.0
@@ -1031,7 +1028,7 @@ do
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
 	 -t ${TOTAL_PARTICLES}\
-	 -p 1 -v 2\
+	 -p 1 -v 0\
 	 patch\
 	 --xleft 0 --xright 200\
 	 --ybottom 100 --ytop 200
@@ -1105,7 +1102,133 @@ spack env activate rustdev
 <<picrw-command>>
 #+end_src
 
-** PIC Rust Strong Scaling
+** PIC RUST Strong Scaling
+
+*** Job Name
+#+begin_src bash :noweb-ref picrs-name
+#SBATCH --job-name pic-r-st
+#+end_src
+
+*** Execution commands
+
+#+begin_src bash :noweb-ref picrs-command
+export RAYON_NUM_THREADS=${SLURM_NTASKS_PER_NODE}
+REPETITIONS=10
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((12*102400))
+for (( i = 0; i < ${REPETITIONS}; i++))
+do
+    echo "~rep: ${i}~" >&2
+    echo "GEOMETRIC" >&2
+    time mpiexec -n ${SLURM_NNODES}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 2\
+	 geometric\
+	 -a 0.99
+    echo "###################################"
+    echo "SINUSOIDAL" >&2
+    time mpiexec -n ${SLURM_NNODES}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 0 -v 1\
+	 sinusoidal
+    echo "###################################"
+    echo "LINEAR" >&2
+    time mpiexec -n ${SLURM_NNODES}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 linear\
+	 -n 1.0\
+	 -c 3.0
+    echo "###################################"
+    echo "PATCH" >&2
+    time mpiexec -n ${SLURM_NNODES}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 patch\
+	 --xleft 0 --xright 200\
+	 --ybottom 100 --ytop 200
+done
+#+end_src
+
+*** Assemble Slurm files for weak scaling and copy files
+
+**** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<picrs-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrs-command>>
+#+end_src
+
+**** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<picrs-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrs-command>>
+#+end_src
+
+**** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<picrs-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrs-command>>
+#+end_src
+
+**** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<picrs-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrs-command>>
+#+end_src
+
+**** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<picrs-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrs-command>>
+#+end_src
+
 * Submit experiments
 ** BS-SOLCTRA MPI+OpenMP Weak Scaling
 *** 1 node
@@ -1119,7 +1242,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235007
+: Submitted batch job 235196
 
 *** 2 nodes
 
@@ -1132,7 +1255,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235010
+: Submitted batch job 235197
 
 *** 4 nodes
 
@@ -1145,7 +1268,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235011
+: Submitted batch job 235198
 
 *** 8 nodes
 
@@ -1158,7 +1281,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235020
+: Submitted batch job 235199
 
 *** 12 nodes
 #+begin_src bash :dir sol-mpi-wk/12
@@ -1166,23 +1289,11 @@ rm -rf results_* *.err *.out stats.csv stdout*
 ln -sf ~/RustMPIExperiments/bs-solctra-implementations/input_1000.txt .
 ln -sf ~/RustMPIExperiments/bs-solctra-implementations/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-implementations/results/bs-solctra-multinode .
-rm -rf results_* solc-* stdout*
-ls
-#+end_src
-
-#+begin_src bash :dir sol-mpi-wk/12
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234120
-
-*** Clean all results
-#+begin_src bash :dir sol-mpi-wk
-rm -rf ./*/results_* ./*/solc-* ./*/stdout* ./*/stats.csv
-#+end_src
-
-#+RESULTS:
+: Submitted batch job 235200
 
 ** BS-SOLCTRA MPI+OpenMP Strong Scaling
 
@@ -1197,7 +1308,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235023
+: Submitted batch job 235201
 
 *** 2 nodes
 
@@ -1210,7 +1321,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235024
+: Submitted batch job 235202
 
 *** 4 nodes
 
@@ -1223,7 +1334,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235025
+: Submitted batch job 235203
 
 *** 8 nodes
 
@@ -1236,7 +1347,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235027
+: Submitted batch job 235204
 
 *** 12 nodes
 
@@ -1249,7 +1360,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234173
+: Submitted batch job 235205
 
 ** BS-SOLCTRA Rust MPI+Rayon Weak Scaling
 *** 1 node
@@ -1263,17 +1374,9 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235029
+: Submitted batch job 235206
 
 *** 2 nodes
-
-#+begin_src bash :dir sol-rst-wk/2
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
-#+end_src
-
-#+RESULTS:
 
 #+begin_src bash :dir sol-rst-wk/2
 rm -r results_* *.err *.out
@@ -1284,7 +1387,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235030
+: Submitted batch job 235207
 
 *** 4 nodes
 
@@ -1297,7 +1400,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235031
+: Submitted batch job 235209
 
 *** 8 nodes
 
@@ -1310,12 +1413,12 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235032
+: Submitted batch job 235212
 
 *** 12 nodes
 
 #+begin_src bash :dir sol-rst-wk/12
-rm -r out_* *.err *.out
+rm -r results_* *.err *.out
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
@@ -1323,7 +1426,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234692
+: Submitted batch job 235213
 
 ** BS-SOLCTRA Rust MPI+Rayon Strong Scaling
 *** 1 node
@@ -1337,7 +1440,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235035
+: Submitted batch job 235215
 
 *** 2 nodes
 
@@ -1397,7 +1500,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235038
+: Submitted batch job 235174
 
 *** 2 nodes
 
@@ -1408,7 +1511,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235039
+: Submitted batch job 235175
 
 *** 4 nodes
 
@@ -1419,7 +1522,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235040
+: Submitted batch job 235176
 
 *** 8 nodes
 
@@ -1430,7 +1533,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235041
+: Submitted batch job 235177
 
 *** 12 nodes
 #+begin_src bash :dir pic-c-wk/12
@@ -1440,7 +1543,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234120
+: Submitted batch job 235178
 
 ** PIC C Strong Scaling
 
@@ -1453,7 +1556,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235042
+: Submitted batch job 235169
 
 *** 2 nodes
 
@@ -1464,7 +1567,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235043
+: Submitted batch job 235170
 
 *** 4 nodes
 
@@ -1475,7 +1578,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235044
+: Submitted batch job 235171
 
 *** 8 nodes
 
@@ -1486,7 +1589,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235045
+: Submitted batch job 235172
 
 *** 12 nodes
 
@@ -1497,7 +1600,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234120
+: Submitted batch job 235173
 
 ** PIC RUST Weak Scaling
 
@@ -1510,48 +1613,104 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235005
+: Submitted batch job 235179
 
 *** 2 nodes
 
-#+begin_src bash :dir pic-c-wk/2
+#+begin_src bash :dir pic-r-wk/2
 rm *.err *.out
-ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234705
+: Submitted batch job 235180
 
 *** 4 nodes
 
-#+begin_src bash :dir pic-c-wk/4
+#+begin_src bash :dir pic-r-wk/4
 rm *.err *.out
-ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234706
+: Submitted batch job 235181
 
 *** 8 nodes
 
-#+begin_src bash :dir pic-c-wk/8
+#+begin_src bash :dir pic-r-wk/8
 rm *.err *.out
-ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234707
+: Submitted batch job 235182
 
 *** 12 nodes
-#+begin_src bash :dir pic-c-wk/12
+#+begin_src bash :dir pic-r-wk/12
 rm *.err *.out
-ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 234120
+: Submitted batch job 235184
+
+** PIC RUST Strong Scaling
+
+*** 1 node
+
+#+begin_src bash :dir pic-r-st/1
+rm *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235162
+
+*** 2 nodes
+
+#+begin_src bash :dir pic-r-st/2
+rm *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235164
+
+*** 4 nodes
+
+#+begin_src bash :dir pic-r-st/4
+rm *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235165
+
+*** 8 nodes
+
+#+begin_src bash :dir pic-r-st/8
+rm *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235166
+
+*** 12 nodes
+#+begin_src bash :dir pic-r-st/12
+rm *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235167
 
