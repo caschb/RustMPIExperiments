@@ -54,6 +54,34 @@ make
 
 * Compiling BS-SOLCTRA Rust+MPI
 
+#+begin_src bash :dir bs-solctra-mpi-rs/tests/test-resources
+tail -n +2 input_1000.csv > temp_file
+echo "" >> temp_file
+echo x,y,z > input_big.csv
+yes temp_file | head -n 10 | xargs cat >> input_big.csv
+rm temp_file
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash :dir bs-solctra-mpi-rs/tests/test-resources
+head input_big.csv
+#+end_src
+
+#+RESULTS:
+|                   x |   y | z |
+|          0.14557183 | 0.0 | 0 |
+|          0.14746016 | 0.0 | 0 |
+| 0.14934849000000003 | 0.0 | 0 |
+| 0.15123682000000002 | 0.0 | 0 |
+| 0.15312515000000002 | 0.0 | 0 |
+|          0.15501348 | 0.0 | 0 |
+| 0.15690181000000003 | 0.0 | 0 |
+| 0.15879014000000002 | 0.0 | 0 |
+| 0.16067847000000002 | 0.0 | 0 |
+
+#+RESULTS:
+
 #+begin_src bash :results output :exports both :dir bs-solctra-mpi-rs
 module load mpich/3.3.2-gcc-9.3.0 gcc/9.3.0
 . /work/casch/spack/share/spack/setup-env.sh
@@ -131,7 +159,7 @@ export REPETITIONS=10
 TOTAL_PARTICLES=$((${SLURM_NNODES}*3968))
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
-    mpiexec -n ${SLURM_NNODES}\
+    srun -n ${SLURM_NNODES}\
 	    ./bs-solctra-multinode\
 	    -length ${TOTAL_PARTICLES}\
 	    -particles input_big.txt\
@@ -257,7 +285,7 @@ TOTAL_PARTICLES=$((12*2560))
 REPETITIONS=10
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
-    mpiexec -n ${SLURM_NNODES}\
+    srun -n ${SLURM_NNODES}\
 	    ./bs-solctra-multinode\
 	    -length ${TOTAL_PARTICLES}\
 	    -particles input_big.txt\
@@ -371,7 +399,6 @@ ln -sf ~/RustMPIExperiments/bs-solctra-implementations/results/bs-solctra-multin
 #+end_src
 
 ** BS-SOLCTRA MPI+Rayon Weak Scaling
-
 *** Job Name
 
 #+begin_src bash :noweb-ref bsrw-name
@@ -386,10 +413,10 @@ TOTAL_PARTICLES=$((${SLURM_NNODES}*2560))
 REPETITIONS=10
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
-    RUST_LOG=info mpiexec -n ${SLURM_NNODES}\
+    RUST_LOG=info srun -n ${SLURM_NNODES}\
 		  ./bs-solctra-rs\
 		  --num-particles ${TOTAL_PARTICLES}\
-		  --particles-file input_1000.csv\
+		  --particles-file input_big.csv\
 		  --resource-path resources/\
 		  --mode 1\
 		  --magprof 0\
@@ -525,10 +552,10 @@ TOTAL_PARTICLES=$((12*2560))
 REPETITIONS=10
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
-    RUST_LOG=debug mpiexec -n ${SLURM_NNODES}\
+    RUST_LOG=debug srun -n ${SLURM_NNODES}\
 		  ./bs-solctra-rs\
 		  --num-particles ${TOTAL_PARTICLES}\
-		  --particles-file input_1000.csv\
+		  --particles-file input_big.csv\
 		  --resource-path resources/\
 		  --mode 1\
 		  --magprof 0\
@@ -652,7 +679,6 @@ spack env activate rustdev
 #+end_src
 
 ** PIC C Weak Scaling
-
 *** Job Name
 #+begin_src bash :noweb-ref piccw-name
 #SBATCH --job-name pic-c-ws
@@ -669,8 +695,9 @@ TOTAL_PARTICLES=$((${SLURM_NNODES}*102400))
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
     echo "~rep: ${i}~" >&2
+    echo "###################################"
     echo "GEOMETRIC" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -679,7 +706,7 @@ do
 	    GEOMETRIC 0.99
     echo "###################################"
     echo "SINUSOIDAL" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -688,7 +715,7 @@ do
 	    SINUSOIDAL
     echo "###################################"
     echo "LINEAR" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -699,7 +726,7 @@ do
 	    3.0
     echo "###################################"
     echo "PATCH" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -816,7 +843,6 @@ spack env activate rustdev
 #+end_src
 
 ** PIC C Strong Scaling
-
 *** Job Name
 #+begin_src bash :noweb-ref piccs-name
 #SBATCH --job-name pic-c-st
@@ -833,8 +859,9 @@ TOTAL_PARTICLES=$((12*102400))
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
     echo "~rep: ${i}~" >&2
+    echo "###################################"
     echo "GEOMETRIC" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -843,7 +870,7 @@ do
 	    GEOMETRIC 0.99
     echo "###################################"
     echo "SINUSOIDAL" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -852,7 +879,7 @@ do
 	    SINUSOIDAL
     echo "###################################"
     echo "LINEAR" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -863,7 +890,7 @@ do
 	    3.0
     echo "###################################"
     echo "PATCH" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	    ./pic\
 	    ${TOTAL_STEPS}\
 	    1000\
@@ -980,7 +1007,6 @@ spack env activate rustdev
 #+end_src
 
 ** PIC RUST Weak Scaling
-
 *** Job Name
 #+begin_src bash :noweb-ref picrw-name
 #SBATCH --job-name pic-r-ws
@@ -996,8 +1022,9 @@ TOTAL_PARTICLES=$((${SLURM_NNODES}*102400))
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
     echo "~rep: ${i}~" >&2
+    echo "###################################"
     echo "GEOMETRIC" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1007,7 +1034,7 @@ do
 	 -a 0.99
     echo "###################################"
     echo "SINUSOIDAL" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1016,7 +1043,7 @@ do
 	 sinusoidal
     echo "###################################"
     echo "LINEAR" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1027,7 +1054,7 @@ do
 	 -c 3.0
     echo "###################################"
     echo "PATCH" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1107,7 +1134,6 @@ spack env activate rustdev
 #+end_src
 
 ** PIC RUST Strong Scaling
-
 *** Job Name
 #+begin_src bash :noweb-ref picrs-name
 #SBATCH --job-name pic-r-st
@@ -1123,8 +1149,9 @@ TOTAL_PARTICLES=$((12*102400))
 for (( i = 0; i < ${REPETITIONS}; i++))
 do
     echo "~rep: ${i}~" >&2
+    echo "###################################"
     echo "GEOMETRIC" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1134,7 +1161,7 @@ do
 	 -a 0.99
     echo "###################################"
     echo "SINUSOIDAL" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1143,7 +1170,7 @@ do
 	 sinusoidal
     echo "###################################"
     echo "LINEAR" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1154,7 +1181,7 @@ do
 	 -c 3.0
     echo "###################################"
     echo "PATCH" >&2
-    time mpiexec -n ${SLURM_NNODES}\
+    time srun -n ${SLURM_NNODES}\
 	 ./pic-mpi\
 	 -i ${TOTAL_STEPS}\
 	 -g 1000\
@@ -1246,7 +1273,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235385
+: Submitted batch job 235410
 
 *** 2 nodes
 
@@ -1259,7 +1286,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235386
+: Submitted batch job 235411
 
 *** 4 nodes
 
@@ -1272,7 +1299,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235387
+: Submitted batch job 235412
 
 *** 8 nodes
 
@@ -1285,7 +1312,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235388
+: Submitted batch job 235413
 
 *** 12 nodes
 #+begin_src bash :dir sol-mpi-wk/12
@@ -1297,7 +1324,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235389
+: Submitted batch job 235414
 
 ** BS-SOLCTRA MPI+OpenMP Strong Scaling
 
@@ -1312,7 +1339,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235391
+: Submitted batch job 235415
 
 *** 2 nodes
 
@@ -1325,7 +1352,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235392
+: Submitted batch job 235416
 
 *** 4 nodes
 
@@ -1338,7 +1365,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235393
+: Submitted batch job 235417
 
 *** 8 nodes
 
@@ -1351,7 +1378,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235394
+: Submitted batch job 235418
 
 *** 12 nodes
 
@@ -1364,138 +1391,138 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235395
+: Submitted batch job 235419
 
 ** BS-SOLCTRA Rust MPI+Rayon Weak Scaling
 *** 1 node
 
 #+begin_src bash :dir sol-rst-wk/1
 rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235369
+: Submitted batch job 235507
 
 *** 2 nodes
 
 #+begin_src bash :dir sol-rst-wk/2
 rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235370
+: Submitted batch job 235508
 
 *** 4 nodes
 
 #+begin_src bash :dir sol-rst-wk/4
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235371
+: Submitted batch job 235509
 
 *** 8 nodes
 
 #+begin_src bash :dir sol-rst-wk/8
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235372
+: Submitted batch job 235510
 
 *** 12 nodes
 
 #+begin_src bash :dir sol-rst-wk/12
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235373
+: Submitted batch job 235511
 
 ** BS-SOLCTRA Rust MPI+Rayon Strong Scaling
 *** 1 node
 
 #+begin_src bash :dir sol-rst-st/1
 rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235374
+: Submitted batch job 235512
 
 *** 2 nodes
 
 #+begin_src bash :dir sol-rst-st/2
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235375
+: Submitted batch job 235513
 
 *** 4 nodes
 #+begin_src bash :dir sol-rst-st/4
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235376
+: Submitted batch job 235514
 
 *** 8 nodes
 
 #+begin_src bash :dir sol-rst-st/8
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235377
+: Submitted batch job 235515
 
 *** 12 nodes
 
 #+begin_src bash :dir sol-rst-st/12
-rm -r results_* *.err *.out
-ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_1000.csv .
+rm -rf results_* *.err *.out
+ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/input_big.csv .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/tests/test-resources/resources .
 ln -sf ~/RustMPIExperiments/bs-solctra-mpi-rs/target/release/bs-solctra-rs .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235378
+: Submitted batch job 235516
 
 ** PIC C Weak Scaling
 
@@ -1508,7 +1535,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235174
+: Submitted batch job 235467
 
 *** 2 nodes
 
@@ -1519,7 +1546,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235175
+: Submitted batch job 235468
 
 *** 4 nodes
 
@@ -1530,28 +1557,28 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235176
+: Submitted batch job 235469
 
 *** 8 nodes
 
 #+begin_src bash :dir pic-c-wk/8
-rm *.err *.out
+rm -f *.err *.out
 ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235177
+: Submitted batch job 235470
 
 *** 12 nodes
 #+begin_src bash :dir pic-c-wk/12
-rm *.err *.out
+rm -f *.err *.out
 ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235178
+: Submitted batch job 235471
 
 ** PIC C Strong Scaling
 
@@ -1564,7 +1591,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235169
+: Submitted batch job 235472
 
 *** 2 nodes
 
@@ -1575,7 +1602,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235170
+: Submitted batch job 235473
 
 *** 4 nodes
 
@@ -1586,7 +1613,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235171
+: Submitted batch job 235474
 
 *** 8 nodes
 
@@ -1597,18 +1624,18 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235172
+: Submitted batch job 235475
 
 *** 12 nodes
 
 #+begin_src bash :dir pic-c-st/12
-rm *.err *.out
+rm -f *.err *.out
 ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235173
+: Submitted batch job 235476
 
 ** PIC RUST Weak Scaling
 
@@ -1621,7 +1648,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235179
+: Submitted batch job 235477
 
 *** 2 nodes
 
@@ -1632,7 +1659,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235180
+: Submitted batch job 235478
 
 *** 4 nodes
 
@@ -1643,7 +1670,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235181
+: Submitted batch job 235479
 
 *** 8 nodes
 
@@ -1654,17 +1681,17 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235182
+: Submitted batch job 235480
 
 *** 12 nodes
 #+begin_src bash :dir pic-r-wk/12
-rm *.err *.out
+rm -f *.err *.out
 ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235184
+: Submitted batch job 235481
 
 ** PIC RUST Strong Scaling
 
@@ -1677,7 +1704,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235162
+: Submitted batch job 235482
 
 *** 2 nodes
 
@@ -1688,7 +1715,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235164
+: Submitted batch job 235483
 
 *** 4 nodes
 
@@ -1699,7 +1726,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235165
+: Submitted batch job 235484
 
 *** 8 nodes
 
@@ -1710,7 +1737,7 @@ sbatch run.slurm
 #+end_src
 
 #+RESULTS:
-: Submitted batch job 235166
+: Submitted batch job 235485
 
 *** 12 nodes
 #+begin_src bash :dir pic-r-st/12
@@ -1718,6 +1745,10 @@ rm *.err *.out
 ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
 sbatch run.slurm
 #+end_src
+
+#+RESULTS:
+: Submitted batch job 235486
+
 pppp
 #+RESULTS:
 : Submitted batch job 235167
@@ -1858,157 +1889,6 @@ rm xx*
 #+end_src
 
 #+RESULTS:
-| c++ | 12 | 1228800 | GEOMETRIC  |   66.86275 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  90.192776 |
-| c++ | 12 | 1228800 | LINEAR     | 141.095721 |
-| c++ | 12 | 1228800 | PATCH      |  16.191386 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  90.030752 |
-| c++ | 12 | 1228800 | LINEAR     |   139.7803 |
-| c++ | 12 | 1228800 | PATCH      |  16.090979 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  90.503641 |
-| c++ | 12 | 1228800 | LINEAR     | 141.571221 |
-| c++ | 12 | 1228800 | PATCH      |  15.754827 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  89.957074 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.358838 |
-| c++ |  4 |  409600 | LINEAR     |  56.064969 |
-| c++ |  4 |  409600 | PATCH      |  14.879947 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.470774 |
-| c++ |  4 |  409600 | LINEAR     |  55.985343 |
-| c++ |  4 |  409600 | PATCH      |  14.878602 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.409523 |
-| c++ |  4 |  409600 | LINEAR     |  54.536537 |
-| c++ |  4 |  409600 | PATCH      |  14.800129 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.325532 |
-| c++ | 12 | 1228800 | LINEAR     | 141.988483 |
-| c++ |  4 |  409600 | LINEAR     |  56.034859 |
-| c++ |  4 |  409600 | PATCH      |  14.891361 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.319181 |
-| c++ |  4 |  409600 | LINEAR     |  55.400389 |
-| c++ |  4 |  409600 | PATCH      |  14.767155 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.125712 |
-| c++ |  4 |  409600 | LINEAR     |  55.892459 |
-| c++ |  4 |  409600 | PATCH      |   14.85887 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.280451 |
-| c++ |  4 |  409600 | LINEAR     |  55.989901 |
-| c++ | 12 | 1228800 | PATCH      |  16.098171 |
-| c++ |  4 |  409600 | PATCH      |  14.876081 |
-| c++ |  8 |  819200 | SINUSOIDAL |  83.369505 |
-| c++ |  8 |  819200 | LINEAR     | 105.788652 |
-| c++ |  8 |  819200 | PATCH      |  14.781421 |
-| c++ |  8 |  819200 | SINUSOIDAL |  83.451466 |
-| c++ |  8 |  819200 | LINEAR     | 108.896163 |
-| c++ |  8 |  819200 | PATCH      |  14.826931 |
-| c++ |  8 |  819200 | SINUSOIDAL |  83.367698 |
-| c++ |  8 |  819200 | LINEAR     | 108.778971 |
-| c++ |  8 |  819200 | PATCH      |  14.745984 |
-| c++ | 12 | 1228800 | SINUSOIDAL |   91.00673 |
-| c++ |  8 |  819200 | SINUSOIDAL |  82.887961 |
-| c++ |  8 |  819200 | LINEAR     | 106.847953 |
-| c++ |  8 |  819200 | PATCH      |  14.694501 |
-| c++ |  8 |  819200 | SINUSOIDAL |  83.417453 |
-| c++ |  8 |  819200 | LINEAR     | 108.806677 |
-| c++ |  8 |  819200 | PATCH      |  14.837949 |
-| c++ |  8 |  819200 | SINUSOIDAL |  83.064559 |
-| c++ |  8 |  819200 | LINEAR     | 108.250785 |
-| c++ |  8 |  819200 | PATCH      |  14.740648 |
-| c++ |  8 |  819200 | SINUSOIDAL |  82.426194 |
-| c++ | 12 | 1228800 | LINEAR     | 142.315138 |
-| c++ |  8 |  819200 | LINEAR     | 107.036087 |
-| c++ |  8 |  819200 | PATCH      |  14.802371 |
-| c++ |  8 |  819200 | SINUSOIDAL |  82.278846 |
-| c++ |  8 |  819200 | LINEAR     | 107.290868 |
-| c++ |  8 |  819200 | PATCH      |  14.782984 |
-| c++ |  8 |  819200 | SINUSOIDAL |  82.052593 |
-| c++ |  8 |  819200 | LINEAR     | 108.052719 |
-| c++ |  8 |  819200 | PATCH      |  14.777021 |
-| c++ |  8 |  819200 | SINUSOIDAL |  84.008589 |
-| c++ |  8 |  819200 | LINEAR     |  106.70253 |
-| c++ | 12 | 1228800 | PATCH      |  16.095654 |
-| c++ |  8 |  819200 | PATCH      |  14.692914 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  91.424842 |
-| c++ | 12 | 1228800 | LINEAR     | 145.420524 |
-| c++ | 12 | 1228800 | PATCH      |    16.2243 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  91.491789 |
-| c++ | 12 | 1228800 | LINEAR     | 142.117754 |
-| c++ | 12 | 1228800 | PATCH      |  16.119066 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  86.434492 |
-| c++ | 12 | 1228800 | LINEAR     | 144.566125 |
-| c++ | 12 | 1228800 | PATCH      |  15.996428 |
-| c++ | 12 | 1228800 | SINUSOIDAL |   91.12369 |
-| c++ | 12 | 1228800 | LINEAR     | 142.498535 |
-| c++ | 12 | 1228800 | PATCH      |  15.985487 |
-| c++ | 12 | 1228800 | SINUSOIDAL |  91.222128 |
-| c++ | 12 | 1228800 | LINEAR     | 143.783011 |
-| c++ | 12 | 1228800 | PATCH      |  15.970201 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.771542 |
-| c++ |  1 |  102400 | LINEAR     |  14.811684 |
-| c++ |  1 |  102400 | PATCH      |  14.885528 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.708375 |
-| c++ |  1 |  102400 | LINEAR     |  14.789178 |
-| c++ |  1 |  102400 | PATCH      |  14.889789 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.785051 |
-| c++ |  1 |  102400 | LINEAR     |  14.820124 |
-| c++ |  1 |  102400 | PATCH      |  14.880805 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.841991 |
-| c++ |  1 |  102400 | LINEAR     |  14.790236 |
-| c++ |  1 |  102400 | PATCH      |  14.894761 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.785746 |
-| c++ |  1 |  102400 | LINEAR     |  14.807325 |
-| c++ |  1 |  102400 | PATCH      |  14.884035 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.776563 |
-| c++ |  1 |  102400 | LINEAR     |  14.845854 |
-| c++ |  1 |  102400 | PATCH      |  14.920949 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.745106 |
-| c++ |  1 |  102400 | LINEAR     |  14.791319 |
-| c++ |  1 |  102400 | PATCH      |  14.886206 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.758929 |
-| c++ |  1 |  102400 | LINEAR     |  14.819098 |
-| c++ |  1 |  102400 | PATCH      |  14.880516 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.692866 |
-| c++ |  1 |  102400 | LINEAR     |  14.261796 |
-| c++ |  1 |  102400 | PATCH      |  14.888987 |
-| c++ |  1 |  102400 | SINUSOIDAL |  14.779386 |
-| c++ |  1 |  102400 | LINEAR     |  14.814709 |
-| c++ |  1 |  102400 | PATCH      |  14.891956 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.229242 |
-| c++ |  2 |  204800 | LINEAR     |  29.723541 |
-| c++ |  2 |  204800 | PATCH      |  14.858468 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.270813 |
-| c++ |  2 |  204800 | LINEAR     |  29.749502 |
-| c++ |  2 |  204800 | PATCH      |  14.891918 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.388419 |
-| c++ |  2 |  204800 | LINEAR     |  29.737179 |
-| c++ |  2 |  204800 | PATCH      |  14.906549 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.328541 |
-| c++ |  2 |  204800 | LINEAR     |  29.676243 |
-| c++ |  2 |  204800 | PATCH      |  14.907756 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.366908 |
-| c++ |  2 |  204800 | LINEAR     |  29.574573 |
-| c++ |  2 |  204800 | PATCH      |  14.900001 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.273719 |
-| c++ |  2 |  204800 | LINEAR     |  29.755425 |
-| c++ |  2 |  204800 | PATCH      |  14.770782 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.255447 |
-| c++ |  2 |  204800 | LINEAR     |  29.587158 |
-| c++ |  2 |  204800 | PATCH      |  14.888521 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.347516 |
-| c++ |  2 |  204800 | LINEAR     |  29.739948 |
-| c++ |  2 |  204800 | PATCH      |  14.871917 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.357334 |
-| c++ |  2 |  204800 | LINEAR     |   29.76437 |
-| c++ |  2 |  204800 | PATCH      |  14.889273 |
-| c++ |  2 |  204800 | SINUSOIDAL |  29.293563 |
-| c++ |  2 |  204800 | LINEAR     |  29.654737 |
-| c++ |  2 |  204800 | PATCH      |  14.903275 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.447843 |
-| c++ |  4 |  409600 | LINEAR     |  56.019123 |
-| c++ |  4 |  409600 | PATCH      |  14.885453 |
-| c++ |  4 |  409600 | SINUSOIDAL |   40.19313 |
-| c++ |  4 |  409600 | LINEAR     |  56.072099 |
-| c++ |  4 |  409600 | PATCH      |  14.888546 |
-| c++ |  4 |  409600 | SINUSOIDAL |  40.232512 |
-| c++ |  4 |  409600 | LINEAR     |  55.864331 |
-| c++ |  4 |  409600 | PATCH      |  14.879354 |
 
 #+begin_src bash :dir pic-r-wk
 cat */*.out | csplit - '/.*#.*/' '{*}' -s
@@ -2023,158 +1903,44 @@ rm xx*
 #+end_src
 
 #+RESULTS:
-| rust | 12 | 1228800 | GEOMETRIC  |  64.440502 |
-| rust | 12 | 1228800 | SINUSOIDAL |  87.944014 |
-| rust | 12 | 1228800 | LINEAR     | 129.195807 |
-| rust | 12 | 1228800 | PATCH      |  17.860641 |
-| rust | 12 | 1228800 | SINUSOIDAL |  89.081732 |
-| rust | 12 | 1228800 | LINEAR     | 127.819703 |
-| rust | 12 | 1228800 | PATCH      |  17.519601 |
-| rust | 12 | 1228800 | SINUSOIDAL |  87.854542 |
-| rust | 12 | 1228800 | LINEAR     | 129.964768 |
-| rust | 12 | 1228800 | PATCH      |  17.508793 |
-| rust | 12 | 1228800 | SINUSOIDAL |   88.92248 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.854817 |
-| rust |  4 |  409600 | LINEAR     |  57.918194 |
-| rust |  4 |  409600 | PATCH      |    16.1159 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.930422 |
-| rust |  4 |  409600 | LINEAR     |  58.010094 |
-| rust |  4 |  409600 | PATCH      |  16.207877 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.810514 |
-| rust |  4 |  409600 | LINEAR     |  56.845114 |
-| rust |  4 |  409600 | PATCH      |  16.190719 |
-| rust |  4 |  409600 | SINUSOIDAL |  50.072894 |
-| rust | 12 | 1228800 | LINEAR     | 129.554465 |
-| rust |  4 |  409600 | LINEAR     |  58.114323 |
-| rust |  4 |  409600 | PATCH      |  16.164221 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.683146 |
-| rust |  4 |  409600 | LINEAR     |  56.324013 |
-| rust |  4 |  409600 | PATCH      |  16.159483 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.850338 |
-| rust |  4 |  409600 | LINEAR     |  57.653416 |
-| rust |  4 |  409600 | PATCH      |  16.159196 |
-| rust |  4 |  409600 | SINUSOIDAL |  48.367679 |
-| rust |  4 |  409600 | LINEAR     |  58.063863 |
-| rust | 12 | 1228800 | PATCH      |  17.574567 |
-| rust |  4 |  409600 | PATCH      |  16.088488 |
-| rust |  8 |  819200 | SINUSOIDAL |  86.383113 |
-| rust |  8 |  819200 | LINEAR     |  99.398557 |
-| rust |  8 |  819200 | PATCH      |  15.913033 |
-| rust |  8 |  819200 | SINUSOIDAL |   87.93099 |
-| rust |  8 |  819200 | LINEAR     |  97.383898 |
-| rust |  8 |  819200 | PATCH      |  15.804124 |
-| rust |  8 |  819200 | SINUSOIDAL |  85.711292 |
-| rust |  8 |  819200 | LINEAR     |  96.470726 |
-| rust |  8 |  819200 | PATCH      |  16.043375 |
-| rust | 12 | 1228800 | SINUSOIDAL |  89.257502 |
-| rust |  8 |  819200 | SINUSOIDAL |  86.171566 |
-| rust |  8 |  819200 | LINEAR     |  97.659426 |
-| rust |  8 |  819200 | PATCH      |  15.832144 |
-| rust |  8 |  819200 | SINUSOIDAL |  85.916207 |
-| rust |  8 |  819200 | LINEAR     | 100.237229 |
-| rust |  8 |  819200 | PATCH      |  16.012432 |
-| rust |  8 |  819200 | SINUSOIDAL |  86.283431 |
-| rust |  8 |  819200 | LINEAR     |   98.81802 |
-| rust |  8 |  819200 | PATCH      |  16.062288 |
-| rust |  8 |  819200 | SINUSOIDAL |  86.465731 |
-| rust | 12 | 1228800 | LINEAR     | 130.288421 |
-| rust |  8 |  819200 | LINEAR     | 100.049672 |
-| rust |  8 |  819200 | PATCH      |  15.897064 |
-| rust |  8 |  819200 | SINUSOIDAL |  85.829598 |
-| rust |  8 |  819200 | LINEAR     |  97.698879 |
-| rust |  8 |  819200 | PATCH      |  15.809602 |
-| rust |  8 |  819200 | SINUSOIDAL |  87.563795 |
-| rust |  8 |  819200 | LINEAR     |  97.118744 |
-| rust |  8 |  819200 | PATCH      |  16.028298 |
-| rust |  8 |  819200 | SINUSOIDAL |  87.056444 |
-| rust |  8 |  819200 | LINEAR     |   98.35738 |
-| rust | 12 | 1228800 | PATCH      |  17.626115 |
-| rust |  8 |  819200 | PATCH      |  16.045236 |
-| rust | 12 | 1228800 | SINUSOIDAL |   89.04596 |
-| rust | 12 | 1228800 | LINEAR     |  129.00233 |
-| rust | 12 | 1228800 | PATCH      |  17.519605 |
-| rust | 12 | 1228800 | SINUSOIDAL |  84.000224 |
-| rust | 12 | 1228800 | LINEAR     | 128.598094 |
-| rust | 12 | 1228800 | PATCH      |  17.461184 |
-| rust | 12 | 1228800 | SINUSOIDAL |  88.068657 |
-| rust | 12 | 1228800 | LINEAR     |  129.29554 |
-| rust | 12 | 1228800 | PATCH      |  17.738894 |
-| rust | 12 | 1228800 | SINUSOIDAL |  89.464852 |
-| rust | 12 | 1228800 | LINEAR     | 129.723217 |
-| rust | 12 | 1228800 | PATCH      |  17.573804 |
-| rust | 12 | 1228800 | SINUSOIDAL |  88.318734 |
-| rust | 12 | 1228800 | LINEAR     | 129.494862 |
-| rust | 12 | 1228800 | PATCH      |  17.469148 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.230286 |
-| rust |  1 |  102400 | LINEAR     |  15.697151 |
-| rust |  1 |  102400 | PATCH      |  16.417611 |
-| rust |  1 |  102400 | SINUSOIDAL |   16.07877 |
-| rust |  1 |  102400 | LINEAR     |  15.616973 |
-| rust |  1 |  102400 | PATCH      |  16.340278 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.088145 |
-| rust |  1 |  102400 | LINEAR     |  15.584175 |
-| rust |  1 |  102400 | PATCH      |  16.468654 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.076653 |
-| rust |  1 |  102400 | LINEAR     |  15.295275 |
-| rust |  1 |  102400 | PATCH      |  16.437824 |
-| rust |  1 |  102400 | SINUSOIDAL |  15.863509 |
-| rust |  1 |  102400 | LINEAR     |  15.585458 |
-| rust |  1 |  102400 | PATCH      |   16.42076 |
-| rust |  1 |  102400 | SINUSOIDAL |   16.12935 |
-| rust |  1 |  102400 | LINEAR     |  15.628766 |
-| rust |  1 |  102400 | PATCH      |  16.394415 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.183521 |
-| rust |  1 |  102400 | LINEAR     |  15.730692 |
-| rust |  1 |  102400 | PATCH      |  16.394149 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.168845 |
-| rust |  1 |  102400 | LINEAR     |  15.657606 |
-| rust |  1 |  102400 | PATCH      |  16.443226 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.111564 |
-| rust |  1 |  102400 | LINEAR     |  15.653843 |
-| rust |  1 |  102400 | PATCH      |  16.404007 |
-| rust |  1 |  102400 | SINUSOIDAL |  16.150897 |
-| rust |  1 |  102400 | LINEAR     |  15.492271 |
-| rust |  1 |  102400 | PATCH      |  16.477891 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.420311 |
-| rust |  2 |  204800 | LINEAR     |  31.812536 |
-| rust |  2 |  204800 | PATCH      |  15.993357 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.233756 |
-| rust |  2 |  204800 | LINEAR     |  32.049463 |
-| rust |  2 |  204800 | PATCH      |  15.849168 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.556093 |
-| rust |  2 |  204800 | LINEAR     |  32.108612 |
-| rust |  2 |  204800 | PATCH      |  15.855097 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.381079 |
-| rust |  2 |  204800 | LINEAR     |  32.117325 |
-| rust |  2 |  204800 | PATCH      |  15.843937 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.464601 |
-| rust |  2 |  204800 | LINEAR     |  31.770242 |
-| rust |  2 |  204800 | PATCH      |  15.894435 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.679727 |
-| rust |  2 |  204800 | LINEAR     |  30.504873 |
-| rust |  2 |  204800 | PATCH      |  15.850925 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.417435 |
-| rust |  2 |  204800 | LINEAR     |  32.137897 |
-| rust |  2 |  204800 | PATCH      |  15.912426 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.651552 |
-| rust |  2 |  204800 | LINEAR     |  32.096714 |
-| rust |  2 |  204800 | PATCH      |  15.925032 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.772936 |
-| rust |  2 |  204800 | LINEAR     |  32.142367 |
-| rust |  2 |  204800 | PATCH      |  15.939054 |
-| rust |  2 |  204800 | SINUSOIDAL |  30.461328 |
-| rust |  2 |  204800 | LINEAR     |  32.144412 |
-| rust |  2 |  204800 | PATCH      |  15.966704 |
-| rust |  4 |  409600 | SINUSOIDAL |  50.012804 |
-| rust |  4 |  409600 | LINEAR     |  58.032087 |
-| rust |  4 |  409600 | PATCH      |  15.921132 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.841167 |
-| rust |  4 |  409600 | LINEAR     |  57.908578 |
-| rust |  4 |  409600 | PATCH      |  16.177206 |
-| rust |  4 |  409600 | SINUSOIDAL |  49.840475 |
-| rust |  4 |  409600 | LINEAR     |  56.735334 |
-| rust |  4 |  409600 | PATCH      |  16.143968 |
 
 #+begin_src bash
 cat pic-c-wk/results.csv pic-r-wk/results.csv > pic-wk.csv
 #+end_src
+
+#+RESULTS:
+
+** PIC Strong scaling
+#+begin_src bash :dir pic-c-st
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "c++," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash :dir pic-r-st
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "rust," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash
+cat pic-c-st/results.csv pic-r-st/results.csv > pic-st.csv
+#+end_src
+
+#+RESULTS:
