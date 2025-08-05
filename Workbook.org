@@ -842,6 +842,131 @@ spack env activate rustdev
 <<piccw-command>>
 #+end_src
 
+** PIC C Weak Scaling Pure MPI
+*** Job Name
+#+begin_src bash :noweb-ref piccwp-name
+#SBATCH --job-name pic-c-ws-pm
+#+end_src
+
+*** Execution commands
+#+begin_src bash :noweb-ref piccwp-command
+export REPETITIONS=10
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((${SLURM_NTASKS}*102400))
+for (( i = 0; i < ${REPETITIONS}; i++))
+do
+    echo "~rep: ${i}~" >&2
+    echo "###################################"
+    echo "GEOMETRIC" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 2\
+	    GEOMETRIC 0.99
+    echo "###################################"
+    echo "SINUSOIDAL" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    0 1\
+	    SINUSOIDAL
+    echo "###################################"
+    echo "LINEAR" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 0\
+	    LINEAR\
+	    1.0\
+	    3.0
+    echo "###################################"
+    echo "PATCH" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 0\
+	    PATCH\
+	    0 200\
+	    100 200
+done
+#+end_src
+*** Assemble Slurm files for weak scaling and copy files
+
+**** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-p/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<piccwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwp-command>>
+#+end_src
+
+**** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-p/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<piccwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwp-command>>
+#+end_src
+
+**** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-p/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<piccwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwp-command>>
+#+end_src
+
+
+**** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-p/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<piccwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwp-command>>
+#+end_src
+
+
+**** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-p/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<piccwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwp-command>>
+#+end_src
+
 ** PIC C Strong Scaling
 *** Job Name
 #+begin_src bash :noweb-ref piccs-name
@@ -904,7 +1029,7 @@ do
 done
 #+end_src
 
-*** Assemble Slurm files for weak scaling and copy files
+*** Assemble Slurm files for strong scaling and copy files
 
 **** 1 node
 
@@ -1004,6 +1129,130 @@ ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
 source /work/casch/spack/share/spack/setup-env.sh
 spack env activate rustdev
 <<piccs-command>>
+#+end_src
+
+** PIC C Strong Scaling Pure MPI
+*** Job Name
+#+begin_src bash :noweb-ref piccsp-name
+#SBATCH --job-name pic-c-sc-pm
+#+end_src
+
+*** Execution commands
+#+begin_src bash :noweb-ref piccsp-command
+export REPETITIONS=10
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((12*102400))
+for (( i = 0; i < ${REPETITIONS}; i++))
+do
+    echo "~rep: ${i}~" >&2
+    echo "###################################"
+    echo "GEOMETRIC" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 2\
+	    GEOMETRIC 0.99
+    echo "###################################"
+    echo "SINUSOIDAL" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    0 1\
+	    SINUSOIDAL
+    echo "###################################"
+    echo "LINEAR" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 0\
+	    LINEAR\
+	    1.0\
+	    3.0
+    echo "###################################"
+    echo "PATCH" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	    ./pic\
+	    ${TOTAL_STEPS}\
+	    1000\
+	    ${TOTAL_PARTICLES}\
+	    1 0\
+	    PATCH\
+	    0 200\
+	    100 200
+done
+#+end_src
+
+*** Assemble Slurm files for strong scaling and copy files
+
+**** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-st-p/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<piccsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccsp-command>>
+#+end_src
+
+**** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-st-p/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<piccsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccsp-command>>
+#+end_src
+
+**** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-st-p/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<piccsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccsp-command>>
+#+end_src
+
+**** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-st-p/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<piccsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccsp-command>>
+#+end_src
+
+**** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-st-p/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<piccsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccsp-command>>
 #+end_src
 
 ** PIC RUST Weak Scaling
@@ -1133,6 +1382,132 @@ spack env activate rustdev
 <<picrw-command>>
 #+end_src
 
+** PIC RUST Weak Scaling Pure MPI
+*** Job Name
+#+begin_src bash :noweb-ref picrwp-name
+#SBATCH --job-name pic-r-ws-p
+#+end_src
+
+*** Execution commands
+
+#+begin_src bash :noweb-ref picrwp-command
+REPETITIONS=10
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((${SLURM_NTASKS}*102400))
+for (( i = 0; i < ${REPETITIONS}; i++))
+do
+    echo "~rep: ${i}~" >&2
+    echo "###################################"
+    echo "GEOMETRIC" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 2\
+	 geometric\
+	 -a 0.99
+    echo "###################################"
+    echo "SINUSOIDAL" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 0 -v 1\
+	 sinusoidal
+    echo "###################################"
+    echo "LINEAR" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 linear\
+	 -n 1.0\
+	 -c 3.0
+    echo "###################################"
+    echo "PATCH" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 patch\
+	 --xleft 0 --xright 200\
+	 --ybottom 100 --ytop 200
+done
+#+end_src
+
+*** Assemble Slurm files for weak scaling and copy files
+
+**** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-p/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<picrwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwp-command>>
+#+end_src
+
+**** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-p/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<picrwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwp-command>>
+#+end_src
+
+**** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-p/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<picrwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwp-command>>
+#+end_src
+
+**** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-p/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<picrwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwp-command>>
+#+end_src
+
+**** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-p/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<picrwp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwp-command>>
+#+end_src
+
 ** PIC RUST Strong Scaling
 *** Job Name
 #+begin_src bash :noweb-ref picrs-name
@@ -1259,6 +1634,434 @@ source /work/casch/spack/share/spack/setup-env.sh
 spack env activate rustdev
 <<picrs-command>>
 #+end_src
+
+** PIC RUST Strong Scaling Pure MPI
+*** Job Name
+#+begin_src bash :noweb-ref picrsp-name
+#SBATCH --job-name pic-r-st-p
+#+end_src
+
+*** Execution commands
+
+#+begin_src bash :noweb-ref picrsp-command
+REPETITIONS=10
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((12*102400))
+for (( i = 0; i < ${REPETITIONS}; i++))
+do
+    echo "~rep: ${i}~" >&2
+    echo "###################################"
+    echo "GEOMETRIC" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 2\
+	 geometric\
+	 -a 0.99
+    echo "###################################"
+    echo "SINUSOIDAL" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 0 -v 1\
+	 sinusoidal
+    echo "###################################"
+    echo "LINEAR" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 linear\
+	 -n 1.0\
+	 -c 3.0
+    echo "###################################"
+    echo "PATCH" >&2
+    time mpirun -n ${SLURM_NTASKS}\
+	 ./pic-mpi\
+	 -i ${TOTAL_STEPS}\
+	 -g 1000\
+	 -t ${TOTAL_PARTICLES}\
+	 -p 1 -v 0\
+	 patch\
+	 --xleft 0 --xright 200\
+	 --ybottom 100 --ytop 200
+done
+#+end_src
+
+*** Assemble Slurm files for strong scaling and copy files
+
+**** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st-p/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<picrsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrsp-command>>
+#+end_src
+
+**** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st-p/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<picrsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrsp-command>>
+#+end_src
+
+**** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st-p/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<picrsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrsp-command>>
+#+end_src
+
+**** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st-p/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<picrsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrsp-command>>
+#+end_src
+
+**** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-st-p/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<picrsp-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrsp-command>>
+#+end_src
+
+** Load Imbalance
+
+*** Compiling for profiling
+
+**** Requirements
+
+- MPICH 3.3.2
+- gcc 9.3.0
+- TAU (Installed from source)
+- PDToolkit (Installed from source)
+
+**** Compiling C version
+#+begin_src bash :tangle Kernels/common/make.defs
+TAU_DIR=/work/casch/tau-2.34.1/x86_64
+CC=gcc -std=c11 -pthread
+CXX=g++ -std=c++20 -pthread -fmax-errors=1
+DEFAULT_OPT_FLAGS=-O0 -g -mtune=native -ffast-math
+# DEFAULT_OPT_FLAGS+=-g3
+DEFAULT_OPT_FLAGS+=-Wall
+MPIDIR=/opt/tools/mpich-3.3.2-gcc-9.3.0
+MPICC=${TAU_DIR}/bin/tau_cc.sh
+MPICXX=${TAU_DIR}/bin/tau_cxx.sh
+MPIFORT=mpifort
+# MPICC=${MPIDIR}/bin/mpicc
+# MPICXX=${MPIDIR}/bin/mpicxx
+# MPIFORT=${MPIDIR}/bin/mpifort
+# MPIINC=-I${MPIDIR}/include
+# MPILIB=-L${MPIDIR}/lib -Wl,-rpath -Wl,${MPIDIR}/lib -lmpi_usempif08 -lmpi
+#+end_src
+
+#+begin_src bash :results output :exports both :dir Kernels/MPI1/PIC-static
+module load mpich/3.3.2-gcc-9.3.0 gcc/9.3.0
+make clean
+TAU_MAKEFILE=/work/casch/tau-2.34.1/x86_64/lib/Makefile.tau-mpi-pdt make pic
+#+end_src
+
+**** Compiling Rust Version
+#+begin_src bash :results output :exports both :dir Kernels/RUST/pic-mpi
+export TAU_MAKEFILE=/work/casch/tau-2.34.1/x86_64/lib/Makefile.tau-mpi-pdt
+export TAU_COMPILER=/work/casch/tau-2.34.1/x86_64/bin/tau_cc.sh
+export RUSTFLAGS="-C linker=/work/casch/tau-2.34.1/x86_64/bin/tau_cc.sh -C link-arg=-Wl,-rpath,/work/casch/tau-2.34.1/x86_64/lib"
+cargo build
+#+end_src
+
+**** PIC C Weak Scaling Pure MPI Imbalance
+***** Job Name
+#+begin_src bash :noweb-ref piccwi-name
+#SBATCH --job-name pic-c-ws-im
+#+end_src
+
+***** Execution commands
+#+begin_src bash :noweb-ref piccwi-command
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((${SLURM_NTASKS}*102400))
+echo "###################################"
+echo "GEOMETRIC" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic\
+     ${TOTAL_STEPS}\
+     1000\
+     ${TOTAL_PARTICLES}\
+     1 2\
+     GEOMETRIC 0.99
+tar -czf geometric.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "SINUSOIDAL" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic\
+     ${TOTAL_STEPS}\
+     1000\
+     ${TOTAL_PARTICLES}\
+     0 1\
+     SINUSOIDAL
+tar -czf sinusoidal.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "LINEAR" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic\
+     ${TOTAL_STEPS}\
+     1000\
+     ${TOTAL_PARTICLES}\
+     1 0\
+     LINEAR\
+     1.0\
+     3.0
+tar -czf linear.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "PATCH" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic\
+     ${TOTAL_STEPS}\
+     1000\
+     ${TOTAL_PARTICLES}\
+     1 0\
+     PATCH\
+     0 200\
+     100 200
+tar -czf patch.tar.gz profile.*
+rm profile.*
+#+end_src
+***** Assemble Slurm files for weak scaling and copy files
+
+****** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-i/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<piccwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwi-command>>
+#+end_src
+
+****** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-i/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<piccwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwi-command>>
+#+end_src
+
+****** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-i/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<piccwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwi-command>>
+#+end_src
+
+
+****** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-i/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<piccwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwi-command>>
+#+end_src
+
+
+****** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-c-wk-i/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<piccwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<piccwi-command>>
+#+end_src
+
+**** PIC RUST Weak Scaling Pure MPI Imbalance
+***** Job Name
+#+begin_src bash :noweb-ref picrwi-name
+#SBATCH --job-name pic-r-ws-i
+#+end_src
+
+***** Execution commands
+
+#+begin_src bash :noweb-ref picrwi-command
+TOTAL_STEPS=100
+TOTAL_PARTICLES=$((${SLURM_NTASKS}*102400))
+echo "###################################"
+echo "GEOMETRIC" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic-mpi\
+     -i ${TOTAL_STEPS}\
+     -g 1000\
+     -t ${TOTAL_PARTICLES}\
+     -p 1 -v 2\
+     geometric\
+     -a 0.99
+tar -czf geometric.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "SINUSOIDAL" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic-mpi\
+     -i ${TOTAL_STEPS}\
+     -g 1000\
+     -t ${TOTAL_PARTICLES}\
+     -p 0 -v 1\
+     sinusoidal
+tar -czf sinusoidal.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "LINEAR" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic-mpi\
+     -i ${TOTAL_STEPS}\
+     -g 1000\
+     -t ${TOTAL_PARTICLES}\
+     -p 1 -v 0\
+     linear\
+     -n 1.0\
+     -c 3.0
+tar -czf linear.tar.gz profile.*
+rm profile.*
+echo "###################################"
+echo "PATCH" >&2
+mpirun -n ${SLURM_NTASKS}\
+     ./pic-mpi\
+     -i ${TOTAL_STEPS}\
+     -g 1000\
+     -t ${TOTAL_PARTICLES}\
+     -p 1 -v 0\
+     patch\
+     --xleft 0 --xright 200\
+     --ybottom 100 --ytop 200
+tar -czf patch.tar.gz profile.*
+rm profile.*
+#+end_src
+
+***** Assemble Slurm files for weak scaling and copy files
+
+****** 1 node
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-i/1/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 1
+<<picrwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwi-command>>
+#+end_src
+
+****** 2 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-i/2/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 2
+<<picrwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwi-command>>
+#+end_src
+
+****** 4 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-i/4/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 4
+<<picrwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwi-command>>
+#+end_src
+
+****** 8 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-i/8/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 8
+<<picrwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwi-command>>
+#+end_src
+
+****** 12 nodes
+
+#+begin_src bash :shebang #!/bin/bash :tangle pic-r-wk-i/12/run.slurm :mkdirp yes :noweb yes
+<<header>>
+#SBATCH --nodes 12
+<<picrwi-name>>
+<<kura-fix>>
+<<modules>>
+source /work/casch/spack/share/spack/setup-env.sh
+spack env activate rustdev
+<<picrwi-command>>
+#+end_src
+
 
 * Submit experiments
 ** BS-SOLCTRA MPI+OpenMP Weak Scaling
@@ -1579,6 +2382,61 @@ sbatch run.slurm
 
 #+RESULTS:
 : Submitted batch job 235471
+** PIC C Weak Pure MPI Scaling
+
+*** 1 node
+
+#+begin_src bash :dir pic-c-wk-p/1
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235704
+
+*** 2 nodes
+
+#+begin_src bash :dir pic-c-wk-p/2
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235705
+
+*** 4 nodes
+
+#+begin_src bash :dir pic-c-wk-p/4
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235706
+
+*** 8 nodes
+
+#+begin_src bash :dir pic-c-wk-p/8
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235707
+
+*** 12 nodes
+#+begin_src bash :dir pic-c-wk-p/12
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235708
 
 ** PIC C Strong Scaling
 
@@ -1637,6 +2495,62 @@ sbatch run.slurm
 #+RESULTS:
 : Submitted batch job 235476
 
+** PIC C Strong Pure MPI Scaling
+
+*** 1 node
+
+#+begin_src bash :dir pic-c-st-p/1
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235714
+
+*** 2 nodes
+
+#+begin_src bash :dir pic-c-st-p/2
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235715
+
+*** 4 nodes
+
+#+begin_src bash :dir pic-c-st-p/4
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235716
+
+*** 8 nodes
+
+#+begin_src bash :dir pic-c-st-p/8
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235717
+
+*** 12 nodes
+#+begin_src bash :dir pic-c-st-p/12
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/MPI1/PIC-static/pic .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235718
+
 ** PIC RUST Weak Scaling
 
 *** 1 node
@@ -1692,6 +2606,62 @@ sbatch run.slurm
 
 #+RESULTS:
 : Submitted batch job 235481
+
+** PIC RUST Weak Pure MPI Scaling
+
+*** 1 node
+
+#+begin_src bash :dir pic-r-wk-p/1
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235709
+
+*** 2 nodes
+
+#+begin_src bash :dir pic-r-wk-p/2
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235710
+
+*** 4 nodes
+
+#+begin_src bash :dir pic-r-wk-p/4
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235711
+
+*** 8 nodes
+
+#+begin_src bash :dir pic-r-wk-p/8
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235712
+
+*** 12 nodes
+#+begin_src bash :dir pic-r-wk-p/12
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235713
 
 ** PIC RUST Strong Scaling
 
@@ -1752,6 +2722,62 @@ sbatch run.slurm
 pppp
 #+RESULTS:
 : Submitted batch job 235167
+
+** PIC RUST Strong Pure MPI Scaling
+
+*** 1 node
+
+#+begin_src bash :dir pic-r-st-p/1
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235719
+
+*** 2 nodes
+
+#+begin_src bash :dir pic-r-st-p/2
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235720
+
+*** 4 nodes
+
+#+begin_src bash :dir pic-r-st-p/4
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235721
+
+*** 8 nodes
+
+#+begin_src bash :dir pic-r-st-p/8
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235722
+
+*** 12 nodes
+#+begin_src bash :dir pic-r-st-p/12
+rm -f *.err *.out
+ln -sf ~/RustMPIExperiments/Kernels/RUST/pic-mpi/target/release/pic-mpi .
+sbatch run.slurm
+#+end_src
+
+#+RESULTS:
+: Submitted batch job 235723
 
 * Results
 ** BS-SOLCTRA weak scaling
@@ -1910,6 +2936,42 @@ cat pic-c-wk/results.csv pic-r-wk/results.csv > pic-wk.csv
 
 #+RESULTS:
 
+** PIC Weak Scaling Pure MPI
+#+begin_src bash :dir pic-c-wk-p
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "c++," $1/20 "," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash :dir pic-r-wk-p
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "rust," $1/20 "," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash
+echo "lang,nodes,ranks,particles,init,rate" > pic-wk-pure.csv
+cat pic-c-wk-p/results.csv pic-r-wk-p/results.csv >> pic-wk-pure.csv
+#+end_src
+
+#+RESULTS:
+
 ** PIC Strong scaling
 #+begin_src bash :dir pic-c-st
 cat */*.out | csplit - '/.*#.*/' '{*}' -s
@@ -1941,6 +3003,42 @@ rm xx*
 
 #+begin_src bash
 cat pic-c-st/results.csv pic-r-st/results.csv > pic-st.csv
+#+end_src
+
+#+RESULTS:
+
+** PIC Strong scaling Pure MPI
+#+begin_src bash :dir pic-c-st-p
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "c++," $1/20 "," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash :dir pic-r-st-p
+cat */*.out | csplit - '/.*#.*/' '{*}' -s
+FILES=`ls xx*`
+rm -f results.csv
+for file in $FILES
+do
+cat $file | tr ':' '=' | grep -e "Number of ranks" -e "Number of particles requested" -e "Rate" -e "Initialization mode" \
+     | awk -F '=' ' { print $2 } ' | tr '\n' ',' | awk -F ',' ' { print "rust," $1/20 "," $1 "," $2 "," $3 "," $4 } ' >> results.csv
+done
+rm xx*
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash
+echo "lang,nodes,ranks,particles,init,rate" > pic-st-pure.csv
+cat pic-c-st-p/results.csv pic-r-st-p/results.csv >> pic-st-pure.csv
 #+end_src
 
 #+RESULTS:
