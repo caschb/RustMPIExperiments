@@ -12,7 +12,7 @@ This will clone the following repos:
 
 + [[https://gitlab.com/CNCA_CeNAT/bs-solctra-implementations.git][BS-Solctra Implementations]]: The original C++ MPI+OpenMP
   implementation of BS-Solctra
-+ [[https://github.com/caschb/bs-solctra-mpi-rs][BS-Solctra-mpi-rs]]: My Rust+Rayon+MPI implementation of BS-Solctra
++ [[https://gitlab.com/CNCA_CeNAT/bs-solctra-repos/bs-solctra-mpi-rs][BS-Solctra-mpi-rs]]: My Rust+Rayon+MPI implementation of BS-Solctra
 + [[https://github.com/caschb/Kernels][Kernels]]: My fork of the Parallel Research Kernels which include the
   Rust MPI code of the PIC simulation
 
