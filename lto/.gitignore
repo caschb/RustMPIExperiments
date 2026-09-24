@@ -1,0 +1,19 @@
+# Run directories are cluster scratch: every binary, input and resource in
+# them is a symlink into /work on Kabre, so only the job output, the parsed
+# results and the analysis are kept.
+*/bs-solctra-multinode
+*/bs-solctra-multinode-lto
+*/bs-solctra-rs
+*/bs-solctra-rs-lto
+*/pic
+*/pic-lto
+*/pic-mpi
+*/pic-mpi-lto
+*/input_big.txt
+*/resources
+*/resources-rs
+
+# Overrides the root results*/*csv rules: these two are the dataset the
+# figures and ANALYSIS.org are built from.
+!/results.csv
+!/baseline-check-2025-vs-2026.csv

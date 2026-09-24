@@ -1,0 +1,172 @@
+#+title: LTO on both sides: Rust vs C/C++ plasma codes on Kabré
+#+date: 2026-09-07
+
+Purpose: pre-empt the talk question "what would the results look like with
+LTO?". The deck says LTO was off on both sides and attributes the PIC gap to
+un-inlined RSMPI wrappers. Both languages were rebuilt with and without LTO
+by the same compilers (gcc 9.3.0, rustc 1.85.0, MPICH 3.3.2); every
+repetition ran C, C+LTO, Rust, Rust+LTO back to back in one exclusive
+allocation, so the comparison is internal to each job. Jobs 612036 (1 node),
+612037 (2 nodes), 612038 (4 nodes), all completed, all 960 PIC runs
+validated. Only the recorded 2025 flags were used (no -march=native, no
+target-cpu=native).
+
+* Headline
+
+1. LTO does not close the PIC gap. C gains 2 to 5% from LTO (up to 10% on
+   strong Linear at 4 nodes); Rust gains 0 to 3% and loses on strong Linear.
+   With LTO on both sides the Rust-vs-C MAPE rises for Geometric, Sinusoidal
+   and Linear, and falls only for Patch, where Rust already leads.
+2. BS-SOLCTRA is insensitive to LTO in both languages (at most 0.4%), and
+   Rust and C++ remain within 1% of each other.
+3. The rebuilt no-LTO C binaries reproduce the 2025 rates within 2%. The
+   rebuilt no-LTO Rust PIC binary does not: it is 2 to 5% slower in weak
+   scaling and 10 to 25% slower at 4 nodes in strong scaling. See Caveats.
+
+* PIC: LTO gain per language (ratio of means, averaged over 1, 2, 4 nodes)
+
+| scaling | style      |     C |  Rust |
+|---------+------------+-------+-------|
+| strong  | Geometric  | 1.022 | 1.019 |
+| strong  | Sinusoidal | 1.044 | 1.006 |
+| strong  | Linear     | 1.050 | 0.982 |
+| strong  | Patch      | 1.041 | 1.010 |
+| weak    | Geometric  | 1.038 | 1.016 |
+| weak    | Sinusoidal | 1.032 | 1.013 |
+| weak    | Linear     | 1.044 | 1.008 |
+| weak    | Patch      | 1.041 | 1.010 |
+
+The C gain is uniform across styles and node counts, which is what an
+inlining gain looks like when the hot loop is the same everywhere. The Rust
+gain is near zero: rustc already inlines across the crate, and fat LTO
+mostly reaches the RSMPI and libffi wrappers, which by this measurement are
+not where the time goes. Per-node paired gains with standard deviations are
+in =summary-table.md= and =figures/pic_lto_speedup.pdf=.
+
+* PIC: Rust / C rate ratio per node count (>1 means Rust faster)
+
+| scaling | style      | nodes | no LTO |   LTO |
+|---------+------------+-------+--------+-------|
+| strong  | Geometric  |     1 |  0.964 | 0.936 |
+| strong  | Geometric  |     2 |  0.969 | 0.995 |
+| strong  | Geometric  |     4 |  0.980 | 0.975 |
+| strong  | Sinusoidal |     1 |  0.807 | 0.782 |
+| strong  | Sinusoidal |     2 |  0.820 | 0.758 |
+| strong  | Sinusoidal |     4 |  0.852 | 0.851 |
+| strong  | Linear     |     1 |  0.721 | 0.671 |
+| strong  | Linear     |     2 |  0.763 | 0.770 |
+| strong  | Linear     |     4 |  0.817 | 0.710 |
+| strong  | Patch      |     1 |  1.091 | 1.056 |
+| strong  | Patch      |     2 |  1.092 | 1.056 |
+| strong  | Patch      |     4 |  1.073 | 1.046 |
+| weak    | Geometric  |     1 |  0.967 | 0.925 |
+| weak    | Geometric  |     2 |  0.987 | 0.988 |
+| weak    | Geometric  |     4 |  1.039 | 1.017 |
+| weak    | Sinusoidal |     1 |  0.807 | 0.778 |
+| weak    | Sinusoidal |     2 |  0.807 | 0.812 |
+| weak    | Sinusoidal |     4 |  0.824 | 0.804 |
+| weak    | Linear     |     1 |  0.625 | 0.600 |
+| weak    | Linear     |     2 |  0.654 | 0.639 |
+| weak    | Linear     |     4 |  0.673 | 0.647 |
+| weak    | Patch      |     1 |  1.098 | 1.065 |
+| weak    | Patch      |     2 |  1.099 | 1.064 |
+| weak    | Patch      |     4 |  1.083 | 1.053 |
+
+* PIC: MAPE of Rust against C over the three node counts (deck definition)
+
+| scaling | style      | no LTO |  LTO |
+|---------+------------+--------+------|
+| strong  | Geometric  |    2.9 |  3.2 |
+| strong  | Sinusoidal |   17.4 | 20.3 |
+| strong  | Linear     |   23.3 | 28.3 |
+| strong  | Patch      |    8.5 |  5.3 |
+| weak    | Geometric  |    2.8 |  3.5 |
+| weak    | Sinusoidal |   18.7 | 20.2 |
+| weak    | Linear     |   34.9 | 37.1 |
+| weak    | Patch      |    9.3 |  6.1 |
+
+The weak Linear gap moves away from, not toward, the Patch residual. Patch
+narrows only because C gains 4% and Rust 1%, with Rust still ahead.
+
+Figure: =figures/pic_lto_mape.pdf=. These MAPEs average over 1, 2 and 4
+nodes; the deck's numbers average over 1 to 8, so they are comparable in
+pattern, not in value (see Caveats for the 2025 comparison at 1, 2, 4).
+
+* BS-SOLCTRA strong scaling
+
+| nodes | C++ (s) | C++ LTO | Rust (s) | Rust LTO | C++ gain | Rust gain |
+|-------+---------+---------+----------+----------+----------+-----------|
+|     1 |  480.25 |  479.83 |   476.34 |   476.41 |    1.001 |     1.000 |
+|     2 |  239.59 |  239.43 |   238.72 |   238.55 |    1.001 |     1.001 |
+|     4 |  120.56 |  120.28 |   120.24 |   119.81 |    1.002 |     1.004 |
+
+Standard deviations are below 0.6 s everywhere (n = 5). LTO has nothing to
+do here: the Biot-Savart loop is one translation unit / one crate, already
+inlined, and the runtime is compute. Figure: =figures/solctra_lto.pdf=.
+
+* What this means for the deck
+
+- "Where the PIC gap comes from" slide: the un-inlined RSMPI wrapper
+  hypothesis predicts a Rust-only gain from LTO that scales with
+  communication volume. Measured: Rust gains at most 3% and C gains more.
+  The hypothesis is not supported; the slide needs a different suspect or
+  an honest "still open".
+- "Three answers" slide: "a gap that reaches 31% without LTO, and is most
+  likely an upper bound" is contradicted; with LTO the weak Linear gap is
+  37% over 1 to 4 nodes.
+- Setup and Limitations slides: "LTO off on both sides" can now be replaced
+  by "LTO on both sides changes the C rates by +2 to +5% and the Rust rates
+  by 0 to +3%; the gap is not an LTO artefact". Also note the Setup slide's
+  =-march=native= / =target-cpu=native= rows do not match the recorded
+  builds (neither flag was used in 2025 or here).
+- BS-SOLCTRA slide: unchanged; LTO is irrelevant there.
+
+* Caveats
+
+- Three node counts (1, 2, 4), not five: the kura-wide partition tops out
+  at four nodes. The 2025 runs at 6 and 8 nodes are where Rust overtook C
+  in strong scaling, so a strong-scaling MAPE over 1 to 4 nodes is larger
+  than the deck's.
+- The rebuilt no-LTO baseline reproduces the 2025 C/C++ numbers within 2%
+  and the 2025 Rust weak-scaling numbers within 2 to 5%, but the Rust
+  strong-scaling numbers at 4 nodes are 10 to 25% below 2025 (Linear 478
+  vs 637 Mparticles/s). The 2025 Rust binary came from the spack rustdev
+  environment; this one from rustup 1.85.0 with the same Cargo.lock. The
+  2025 binary is preserved in =orig-binaries-2025/= on Kabré, so a
+  back-to-back run of the two Rust binaries at 4 nodes would settle whether
+  the difference is the build or the 2025 conditions. Numbers in
+  =baseline-check-2025-vs-2026.csv=.
+- Strong-scaling Rust rates at 2 and 4 nodes have large spreads (sd up to
+  75 Mparticles/s at 4 nodes Linear), which is why the Rust LTO gain there
+  has error bars crossing 1.0. Weak scaling is tight for both languages.
+- The smoke test compared BS-SOLCTRA output files, but both codes only
+  write the step-0 file (print period 10000), so LTO's effect on the
+  trajectory was not checked. PIC validation (the PRK analytic check)
+  passed for every run, including the -ffast-math C build.
+- The C++ BS-SOLCTRA time is the stdout "Total execution time=[X]" value,
+  which includes I/O and is about 0.15 s above the exec_compTime.txt value.
+
+* Directory
+
+All under =RustMPIExperiments/lto/= (mirrored on Kabré at
+=/work/casch/RustMPIExperiments/lto/=, which additionally holds =bin/= with
+the eight binaries and =orig-binaries-2025/=).
+
+| Path                                | Content                                                                 |
+|-------------------------------------+-------------------------------------------------------------------------|
+| =results.csv=                       | 1020 rows: code,lang,lto,nodes,ranks,scaling,style,rep,metric           |
+| =summary-table.md=                  | mean +/- sd per variant, MAPE, LTO speedup per configuration            |
+| =baseline-check-2025-vs-2026.csv=   | rebuilt no-LTO means against the 2025 paper data at 1, 2, 4 nodes       |
+| =figures/pic_lto_rates.pdf=         | PIC rate vs ranks, four series, strong and weak, four styles            |
+| =figures/pic_lto_speedup.pdf=       | paired LTO gain per language, style, node count                         |
+| =figures/pic_lto_mape.pdf=          | Rust-vs-C MAPE, no LTO next to LTO                                      |
+| =figures/solctra_lto.pdf=           | BS-SOLCTRA time vs nodes and LTO gain                                   |
+| =1/ 2/ 4/=                          | job stdout/stderr (=lto-N_<job>.out/.err=) and BS-SOLCTRA per-run logs  |
+| =smoke/=                            | one-node smoke test outputs (job 612035)                                |
+| =run-lto-{1,2,4}.slurm=, =pic-common.sh= | job scripts; marker lines and command lines                        |
+| =build-lto.sh=, =build-*.log/.verbose=   | build recipe and the verbose logs proving LTO was applied          |
+| =parse-results.py=, =analyze.py=    | outputs to results.csv; summary table                                   |
+
+Figure sources: =viz/src/viz/lto.py=, regenerate with =make lto= in =viz/=
+(also writes to =viz/figures/=). Recipe: "LTO comparison (2026-09-07)"
+section at the end of =Workbook.org=.

@@ -1,0 +1,215 @@
+Using built-in specs.
+COLLECT_GCC=g++
+COLLECT_LTO_WRAPPER=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include -D_GNU_SOURCE -D_REENTRANT solctra_multinode.h -quiet -dumpbase solctra_multinode.h -mtune=generic -march=x86-64 -auxbase solctra_multinode -O3 -std=c++11 -version -fopenmp -flto -o /tmp/ccj8R1I0.s --output-pch= /work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+ignoring duplicate directory "/opt/compilers/gcc-9.3.0/include"
+  as it is a non-system directory that duplicates a system directory
+ignoring duplicate directory "/opt/tools/mpich-3.3.2-gcc-9.3.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/tools/mpich-3.3.2-gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+ /usr/local/include
+ /opt/compilers/gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 044e65694b7c40e7b300541982cd81fa
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include -D_GNU_SOURCE -D_REENTRANT solctra_multinode.cpp -quiet -dumpbase solctra_multinode.cpp -mtune=generic -march=x86-64 -auxbase solctra_multinode -O3 -std=c++11 -version -fopenmp -flto -o /tmp/ccj8R1I0.s
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+ignoring duplicate directory "/opt/compilers/gcc-9.3.0/include"
+  as it is a non-system directory that duplicates a system directory
+ignoring duplicate directory "/opt/tools/mpich-3.3.2-gcc-9.3.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/tools/mpich-3.3.2-gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+ /usr/local/include
+ /opt/compilers/gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 044e65694b7c40e7b300541982cd81fa
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ as -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include --64 -o /tmp/ccVKsluW.o /tmp/ccj8R1I0.s
+GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-123.el8
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include -D_GNU_SOURCE -D_REENTRANT main_multinode.cpp -quiet -dumpbase main_multinode.cpp -mtune=generic -march=x86-64 -auxbase main_multinode -O3 -std=c++11 -version -fopenmp -flto -o /tmp/ccj8R1I0.s
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+ignoring duplicate directory "/opt/compilers/gcc-9.3.0/include"
+  as it is a non-system directory that duplicates a system directory
+ignoring duplicate directory "/opt/tools/mpich-3.3.2-gcc-9.3.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/tools/mpich-3.3.2-gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+ /usr/local/include
+ /opt/compilers/gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 044e65694b7c40e7b300541982cd81fa
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ as -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include --64 -o /tmp/ccoNFuk3.o /tmp/ccj8R1I0.s
+GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-123.el8
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include -D_GNU_SOURCE -D_REENTRANT utils.h -quiet -dumpbase utils.h -mtune=generic -march=x86-64 -auxbase utils -O3 -std=c++11 -version -fopenmp -flto -o /tmp/ccj8R1I0.s --output-pch= /work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+ignoring duplicate directory "/opt/compilers/gcc-9.3.0/include"
+  as it is a non-system directory that duplicates a system directory
+ignoring duplicate directory "/opt/tools/mpich-3.3.2-gcc-9.3.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/tools/mpich-3.3.2-gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+ /usr/local/include
+ /opt/compilers/gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 044e65694b7c40e7b300541982cd81fa
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/cc1plus -quiet -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include -D_GNU_SOURCE -D_REENTRANT utils.cpp -quiet -dumpbase utils.cpp -mtune=generic -march=x86-64 -auxbase utils -O3 -std=c++11 -version -fopenmp -flto -o /tmp/ccj8R1I0.s
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../x86_64-pc-linux-gnu/include"
+ignoring duplicate directory "/opt/compilers/gcc-9.3.0/include"
+  as it is a non-system directory that duplicates a system directory
+ignoring duplicate directory "/opt/tools/mpich-3.3.2-gcc-9.3.0/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/tools/mpich-3.3.2-gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include
+ /usr/local/include
+ /opt/compilers/gcc-9.3.0/include
+ /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed
+ /usr/include
+End of search list.
+GNU C++11 (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 044e65694b7c40e7b300541982cd81fa
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ as -v -I /opt/tools/mpich-3.3.2-gcc-9.3.0/include --64 -o /tmp/ccbvnnrn.o /tmp/ccj8R1I0.s
+GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-123.el8
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+Reading specs from /opt/compilers/gcc-9.3.0/lib64/../lib64/libgomp.spec
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/collect2 -plugin /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/liblto_plugin.so -plugin-opt=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccOcgXBN.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -flto --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o /work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto /lib/../lib64/crt1.o /lib/../lib64/crti.o /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o -L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib -L/opt/compilers/gcc-9.3.0/lib64/../lib64 -L/opt/compilers/gcc-9.3.0/lib/../lib64 -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0 -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/compilers/gcc-9.3.0/lib64 -L/opt/compilers/gcc-9.3.0/lib -L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../.. /tmp/ccVKsluW.o /tmp/ccoNFuk3.o /tmp/ccbvnnrn.o -lmpicxx -rpath /opt/tools/mpich-3.3.2-gcc-9.3.0/lib --enable-new-dtags -lmpi -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o /lib/../lib64/crtn.o
+/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -fresolution=/tmp/ccOcgXBN.res -flinker-output=exec /tmp/ccVKsluW.o /tmp/ccoNFuk3.o /tmp/ccbvnnrn.o 
+g++ @/tmp/ccXQCHte
+Using built-in specs.
+COLLECT_GCC=g++
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COLLECT_GCC_OPTIONS='-c' '-fno-openacc' '-fno-pie' '-O3' '-v' '-O3' '-fopenmp' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' '/work/casch/RustMPIExperiments/lto/bin/' '-dumpbase' 'bs-solctra-multinode-lto.wpa' '-fltrans-output-list=/tmp/bs-solctra-multinode-lto.IxlVok.ltrans.out' '-fwpa' '-fresolution=/tmp/ccOcgXBN.res' '-flinker-output=exec' '-shared-libgcc' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto1 -quiet -dumpdir /work/casch/RustMPIExperiments/lto/bin/ -dumpbase bs-solctra-multinode-lto.wpa -mtune=generic -march=x86-64 -auxbase ccVKsluW -O3 -O3 -version -fno-openacc -fno-pie -fopenmp -fltrans-output-list=/tmp/bs-solctra-multinode-lto.IxlVok.ltrans.out -fwpa -fresolution=/tmp/ccOcgXBN.res -flinker-output=exec @/tmp/ccpxzFCg
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/../lib64/:/lib/../lib64/../lib64/:/usr/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-fno-openacc' '-fno-pie' '-O3' '-v' '-O3' '-fopenmp' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' '/work/casch/RustMPIExperiments/lto/bin/' '-dumpbase' 'bs-solctra-multinode-lto.wpa' '-fltrans-output-list=/tmp/bs-solctra-multinode-lto.IxlVok.ltrans.out' '-fwpa' '-fresolution=/tmp/ccOcgXBN.res' '-flinker-output=exec' '-shared-libgcc' '-pthread'
+g++ @/tmp/ccSqiX0u
+Using built-in specs.
+COLLECT_GCC=g++
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COLLECT_GCC_OPTIONS='-c' '-fno-openacc' '-fno-pie' '-O3' '-v' '-O3' '-fopenmp' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' '/work/casch/RustMPIExperiments/lto/bin/' '-dumpbase' 'bs-solctra-multinode-lto.ltrans0' '-fltrans' '-o' '/tmp/bs-solctra-multinode-lto.IxlVok.ltrans0.ltrans.o' '-shared-libgcc' '-pthread'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto1 -quiet -dumpdir /work/casch/RustMPIExperiments/lto/bin/ -dumpbase bs-solctra-multinode-lto.ltrans0 -mtune=generic -march=x86-64 -auxbase-strip /tmp/bs-solctra-multinode-lto.IxlVok.ltrans0.ltrans.o -O3 -O3 -version -fno-openacc -fno-pie -fopenmp -fltrans @/tmp/ccazvOpE -o /tmp/cc9hCfUE.s
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-c' '-fno-openacc' '-fno-pie' '-O3' '-v' '-O3' '-fopenmp' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' '/work/casch/RustMPIExperiments/lto/bin/' '-dumpbase' 'bs-solctra-multinode-lto.ltrans0' '-fltrans' '-o' '/tmp/bs-solctra-multinode-lto.IxlVok.ltrans0.ltrans.o' '-shared-libgcc' '-pthread'
+ as -v --64 -o /tmp/bs-solctra-multinode-lto.IxlVok.ltrans0.ltrans.o /tmp/cc9hCfUE.s
+GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-123.el8
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/../lib64/:/lib/../lib64/../lib64/:/usr/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-fno-openacc' '-fno-pie' '-O3' '-v' '-O3' '-fopenmp' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread' '-dumpdir' '/work/casch/RustMPIExperiments/lto/bin/' '-dumpbase' 'bs-solctra-multinode-lto.ltrans0' '-fltrans' '-o' '/tmp/bs-solctra-multinode-lto.IxlVok.ltrans0.ltrans.o' '-shared-libgcc' '-pthread'
+COLLECT_GCC_OPTIONS='-v' '-O3' '-std=c++11' '-fopenmp' '-flto' '-o' '/work/casch/RustMPIExperiments/lto/bin/bs-solctra-multinode-lto' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-pthread'

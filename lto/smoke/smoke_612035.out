@@ -1,0 +1,346 @@
+nodes=1 ntasks=20 host=kura-1d.cnca
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = GEOMETRIC
+  Attenuation factor               = 0.990000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 2
+Rank search mode used              = simple
+Number of particles placed         = 1226576
+Solution validates
+Rate (Mparticles_moved/s): 73.047233
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = GEOMETRIC
+  Attenuation factor               = 0.990000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 2
+Rank search mode used              = simple
+Number of particles placed         = 1226576
+Solution validates
+Rate (Mparticles_moved/s): 72.544901
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = GEOMETRIC
+  Attenuation factor           = 0.990000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 2
+Rank search mode used              = simple
+Number of particles placed         = 1226576
+total time: 1.755197654
+Solution validates
+Rate (Mparticles_moved/s): 70.009209
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = GEOMETRIC
+  Attenuation factor           = 0.990000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 2
+Rank search mode used              = simple
+Number of particles placed         = 1226576
+total time: 1.727963372
+Solution validates
+Rate (Mparticles_moved/s): 71.112618
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = SINUSOIDAL
+Particle charge semi-increment (k) = 0
+Vertical velocity              (m) = 1
+Rank search mode used              = simple
+Number of particles placed         = 1218658
+Solution validates
+Rate (Mparticles_moved/s): 124.385294
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = SINUSOIDAL
+Particle charge semi-increment (k) = 0
+Vertical velocity              (m) = 1
+Rank search mode used              = simple
+Number of particles placed         = 1218658
+Solution validates
+Rate (Mparticles_moved/s): 126.518565
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = SINUSOIDAL
+Particle charge semi-increment (k) = 0
+Vertical velocity              (m) = 1
+Rank search mode used              = simple
+Number of particles placed         = 1218658
+total time: 1.224544837
+Solution validates
+Rate (Mparticles_moved/s): 100.347489
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = SINUSOIDAL
+Particle charge semi-increment (k) = 0
+Vertical velocity              (m) = 1
+Rank search mode used              = simple
+Number of particles placed         = 1218658
+total time: 1.182220016
+Solution validates
+Rate (Mparticles_moved/s): 103.940044
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = LINEAR
+  Negative slope                   = 1.000000
+  Offset                           = 3.000000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1129164
+Solution validates
+Rate (Mparticles_moved/s): 146.960751
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = LINEAR
+  Negative slope                   = 1.000000
+  Offset                           = 3.000000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1129164
+Solution validates
+Rate (Mparticles_moved/s): 178.718663
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = LINEAR
+  Negative slope               = 1.000000
+  Offset                       = 3.000000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1129164
+total time: 1.095928559
+Solution validates
+Rate (Mparticles_moved/s): 112.124097
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = LINEAR
+  Negative slope               = 1.000000
+  Offset                       = 3.000000
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1129164
+total time: 1.021142864
+Solution validates
+Rate (Mparticles_moved/s): 120.335757
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = PATCH
+  Bounding box                     = 0, 200, 100, 200
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1227313
+Solution validates
+Rate (Mparticles_moved/s): 14.192592
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=0
+Parallel Research Kernels version 2.17
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode                = PATCH
+  Bounding box                     = 0, 200, 100, 200
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1227313
+Solution validates
+Rate (Mparticles_moved/s): 14.809417
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = PATCH
+  Bounding box                 = 0, 200, 100, 200
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1227313
+total time: 7.920354982
+Solution validates
+Rate (Mparticles_moved/s): 15.514456
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=0
+Parallel Research Kernels
+MPI Particle-in-Cell execution on 2D grid
+Number of ranks                    = 20
+Load balancing                     = None
+Grid size                          = 1000
+Tiles in x/y-direction             = 4/5
+Number of particles requested      = 1228800
+Number of time steps               = 100
+Initialization mode            = PATCH
+  Bounding box                 = 0, 200, 100, 200
+Particle charge semi-increment (k) = 1
+Vertical velocity              (m) = 0
+Rank search mode used              = simple
+Number of particles placed         = 1227313
+total time: 7.845296346
+Solution validates
+Rate (Mparticles_moved/s): 15.662888
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=0
+Communicator Size=[1].
+Running with:
+Resource Path=[resources/].
+JobId=[61203500].
+Steps=[20].
+Steps size=[0.001].
+Particles=[61440].
+Input Current=[-4350] A.
+Mode=[1].
+Output path=[results_61203500].
+Loading input_big.txt with length=61440
+Particles initialized
+Loading resources//Bobina0m.txt with length=361
+Loading resources//Bobina1m.txt with length=361
+Loading resources//Bobina2m.txt with length=361
+Loading resources//Bobina3m.txt with length=361
+Loading resources//Bobina4m.txt with length=361
+Loading resources//Bobina5m.txt with length=361
+Loading resources//Bobina6m.txt with length=361
+Loading resources//Bobina7m.txt with length=361
+Loading resources//Bobina8m.txt with length=361
+Loading resources//Bobina9m.txt with length=361
+Loading resources//Bobina10m.txt with length=361
+Loading resources//Bobina11m.txt with length=361
+Coil data loaded
+Executing simulation
+Simulation finished
+Total execution time=[13.922].
+Timestamp: Mon Sep  7 15:47:21 2026
+
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=0
+Communicator Size=[1].
+Running with:
+Resource Path=[resources/].
+JobId=[61203510].
+Steps=[20].
+Steps size=[0.001].
+Particles=[61440].
+Input Current=[-4350] A.
+Mode=[1].
+Output path=[results_61203510].
+Loading input_big.txt with length=61440
+Particles initialized
+Loading resources//Bobina0m.txt with length=361
+Loading resources//Bobina1m.txt with length=361
+Loading resources//Bobina2m.txt with length=361
+Loading resources//Bobina3m.txt with length=361
+Loading resources//Bobina4m.txt with length=361
+Loading resources//Bobina5m.txt with length=361
+Loading resources//Bobina6m.txt with length=361
+Loading resources//Bobina7m.txt with length=361
+Loading resources//Bobina8m.txt with length=361
+Loading resources//Bobina9m.txt with length=361
+Loading resources//Bobina10m.txt with length=361
+Loading resources//Bobina11m.txt with length=361
+Coil data loaded
+Executing simulation
+Simulation finished
+Total execution time=[13.82].
+Timestamp: Mon Sep  7 15:47:36 2026
+
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=0
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=0
+### smoke done

@@ -1,0 +1,40 @@
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=0
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=0
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=0
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=0
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=0
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=0
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=0
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=0
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=0
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=0
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=0
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203500
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T21:47:36Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Simulation time: 13.570736646652222
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=0
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203510
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T21:47:50Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T21:48:04Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T21:48:04Z INFO  bs_solctra_rs] Simulation time: 13.788067102432251

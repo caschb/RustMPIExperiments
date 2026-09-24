@@ -1,0 +1,282 @@
+pic.c: In function ‘main’:
+pic.c:702:64: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  702 |       printf("ERROR: Number of time steps must be positive: %llu\n", iterations);
+      |                                                             ~~~^     ~~~~~~~~~~
+      |                                                                |     |
+      |                                                                |     uint64_t {aka long unsigned int}
+      |                                                                long long unsigned int
+      |                                                             %lu
+pic.c:709:73: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  709 |       printf("ERROR: Number of grid cells must be positive and even: %llu\n", L);
+      |                                                                      ~~~^     ~
+      |                                                                         |     |
+      |                                                                         |     uint64_t {aka long unsigned int}
+      |                                                                         long long unsigned int
+      |                                                                      %lu
+pic.c:715:63: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  715 |       printf("ERROR: Number of particles must be positive: %llu\n", n);
+      |                                                            ~~~^     ~
+      |                                                               |     |
+      |                                                               |     uint64_t {aka long unsigned int}
+      |                                                               long long unsigned int
+      |                                                            %lu
+pic.c:741:14: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  741 |       strcpy(label, "GEOMETRIC");
+      |              ^~~~~
+In file included from ../../include/par-res-kern_general.h:44,
+                 from pic.c:77:
+/usr/include/string.h:122:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+  122 | extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+      |              ^~~~~~
+pic.c:753:14: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  753 |       strcpy(label, "SINUSOIDAL");
+      |              ^~~~~
+In file included from ../../include/par-res-kern_general.h:44,
+                 from pic.c:77:
+/usr/include/string.h:122:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+  122 | extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+      |              ^~~~~~
+pic.c:760:14: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  760 |       strcpy(label, "LINEAR");
+      |              ^~~~~
+In file included from ../../include/par-res-kern_general.h:44,
+                 from pic.c:77:
+/usr/include/string.h:122:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+  122 | extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+      |              ^~~~~~
+pic.c:779:14: warning: passing argument 1 of ‘strcpy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+  779 |       strcpy(label, "PATCH");
+      |              ^~~~~
+In file included from ../../include/par-res-kern_general.h:44,
+                 from pic.c:77:
+/usr/include/string.h:122:14: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+  122 | extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+      |              ^~~~~~
+pic.c:832:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  832 |     printf("Grid size                          = %llu\n", L);
+      |                                                  ~~~^     ~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:834:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  834 |     printf("Number of particles requested      = %llu\n", n);
+      |                                                  ~~~^     ~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:835:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  835 |     printf("Number of time steps               = %llu\n", iterations);
+      |                                                  ~~~^     ~~~~~~~~~~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:842:69: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  842 |     case PATCH:     printf("  Bounding box                     = %llu, %llu, %llu, %llu\n",
+      |                                                                  ~~~^
+      |                                                                     |
+      |                                                                     long long unsigned int
+      |                                                                  %lu
+  843 |                            init_patch.left, init_patch.right,
+      |                            ~~~~~~~~~~~~~~~                           
+      |                                      |
+      |                                      uint64_t {aka long unsigned int}
+pic.c:842:75: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  842 |     case PATCH:     printf("  Bounding box                     = %llu, %llu, %llu, %llu\n",
+      |                                                                        ~~~^
+      |                                                                           |
+      |                                                                           long long unsigned int
+      |                                                                        %lu
+  843 |                            init_patch.left, init_patch.right,
+      |                                             ~~~~~~~~~~~~~~~~               
+      |                                                       |
+      |                                                       uint64_t {aka long unsigned int}
+pic.c:842:81: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 4 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  842 |     case PATCH:     printf("  Bounding box                     = %llu, %llu, %llu, %llu\n",
+      |                                                                              ~~~^
+      |                                                                                 |
+      |                                                                                 long long unsigned int
+      |                                                                              %lu
+  843 |                            init_patch.left, init_patch.right,
+  844 |                            init_patch.bottom, init_patch.top);                    break;
+      |                            ~~~~~~~~~~~~~~~~~                                     
+      |                                      |
+      |                                      uint64_t {aka long unsigned int}
+pic.c:842:87: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 5 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  842 |     case PATCH:     printf("  Bounding box                     = %llu, %llu, %llu, %llu\n",
+      |                                                                                    ~~~^
+      |                                                                                       |
+      |                                                                                       long long unsigned int
+      |                                                                                    %lu
+  843 |                            init_patch.left, init_patch.right,
+  844 |                            init_patch.bottom, init_patch.top);                    break;
+      |                                               ~~~~~~~~~~~~~~                           
+      |                                                         |
+      |                                                         uint64_t {aka long unsigned int}
+pic.c:848:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  848 |     printf("Particle charge semi-increment (k) = %llu\n", k);
+      |                                                  ~~~^     ~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:849:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  849 |     printf("Vertical velocity              (m) = %llu\n", m);
+      |                                                  ~~~^     ~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:857:49: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  857 |     if (my_ID==0) printf("k-value too large: %llu, must be no greater than %llu\n", k, width/2);
+      |                                              ~~~^                                   ~
+      |                                                 |                                   |
+      |                                                 long long unsigned int              uint64_t {aka long unsigned int}
+      |                                              %lu
+pic.c:857:79: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  857 |     if (my_ID==0) printf("k-value too large: %llu, must be no greater than %llu\n", k, width/2);
+      |                                                                            ~~~^        ~~~~~~~
+      |                                                                               |             |
+      |                                                                               |             uint64_t {aka long unsigned int}
+      |                                                                               long long unsigned int
+      |                                                                            %lu
+pic.c:873:49: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  873 |     if (my_ID==0) printf("m-value too large: %llu, must be no greater than %llu\n", m, height);
+      |                                              ~~~^                                   ~
+      |                                                 |                                   |
+      |                                                 long long unsigned int              uint64_t {aka long unsigned int}
+      |                                              %lu
+pic.c:873:79: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  873 |     if (my_ID==0) printf("m-value too large: %llu, must be no greater than %llu\n", m, height);
+      |                                                                            ~~~^        ~~~~~~
+      |                                                                               |        |
+      |                                                                               |        uint64_t {aka long unsigned int}
+      |                                                                               long long unsigned int
+      |                                                                            %lu
+pic.c:936:60: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  936 |     printf("ERROR: Rank %d could not allocate space for %llu particles\n", my_ID, particles_size);
+      |                                                         ~~~^                      ~~~~~~~~~~~~~~
+      |                                                            |                      |
+      |                                                            long long unsigned int uint64_t {aka long unsigned int}
+      |                                                         %lu
+pic.c:949:53: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+  949 |     printf("Number of particles placed         = %llu\n", total_particles);
+      |                                                  ~~~^     ~~~~~~~~~~~~~~~
+      |                                                     |     |
+      |                                                     |     uint64_t {aka long unsigned int}
+      |                                                     long long unsigned int
+      |                                                  %lu
+pic.c:1021:62: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1021 |         printf("Could not find neighbor owner of particle %llu in tile %llu\n",
+      |                                                           ~~~^
+      |                                                              |
+      |                                                              long long unsigned int
+      |                                                           %lu
+ 1022 |         i, owner);
+      |         ~                                                     
+      |         |
+      |         uint64_t {aka long unsigned int}
+pic.c:1021:75: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 3 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1021 |         printf("Could not find neighbor owner of particle %llu in tile %llu\n",
+      |                                                                        ~~~^
+      |                                                                           |
+      |                                                                           long long unsigned int
+      |                                                                        %lu
+ 1022 |         i, owner);
+      |            ~~~~~                                                           
+      |            |
+      |            uint64_t {aka long unsigned int}
+pic.c:1066:14: warning: passing argument 1 of ‘snprintf’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+ 1066 |     snprintf(filename, sizeof(filename), "rank_times.csv");
+      |              ^~~~~~~~
+In file included from ../../include/par-res-kern_general.h:41,
+                 from pic.c:77:
+/usr/include/stdio.h:354:39: note: expected ‘char * restrict’ but argument is of type ‘const char *’
+  354 | extern int snprintf (char *__restrict __s, size_t __maxlen,
+      |                      ~~~~~~~~~~~~~~~~~^~~
+pic.c:1084:35: warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument 2 has type ‘uint64_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1084 |       printf("ERROR: there are %llu miscalculated locations\n", total_particles-correctness_checksum);
+      |                                ~~~^                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                   |                                            |
+      |                                   long long unsigned int                       uint64_t {aka long unsigned int}
+      |                                %lu
+pic.c:640:19: warning: unused variable ‘actual_particles’ [-Wunused-variable]
+  640 |   uint64_t        actual_particles,  // actual number of particles owned by my rank
+      |                   ^~~~~~~~~~~~~~~~
+In file included from pic.c:78:
+At top level:
+../../include/par-res-kern_mpi.h:78:12: warning: ‘PRK_Win_free’ defined but not used [-Wunused-function]
+   78 | static int PRK_Win_free(MPI_Win * win)
+      |            ^~~~~~~~~~~~
+../../include/par-res-kern_mpi.h:59:12: warning: ‘PRK_Win_allocate’ defined but not used [-Wunused-function]
+   59 | static int PRK_Win_allocate(MPI_Aint size, int disp_unit, MPI_Info info,
+      |            ^~~~~~~~~~~~~~~~
+../../common/random_draw.c: In function ‘random_draw’:
+../../common/random_draw.c:171:19: warning: variable ‘i0’ set but not used [-Wunused-but-set-variable]
+  171 |   static uint64_t i0, i1;
+      |                   ^~
+../../common/random_draw.c:168:23: warning: variable ‘z1’ set but not used [-Wunused-but-set-variable]
+  168 |   static double   z0, z1;
+      |                       ^~
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-o' 'pic' '-O3' '-mtune=native' '-ffast-math' '-g3' '-Wall' '-flto' '-D' 'MPI' '-v' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/collect2 -plugin /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/liblto_plugin.so -plugin-opt=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccRltsbh.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -flto --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o pic /lib/../lib64/crt1.o /lib/../lib64/crti.o /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtbegin.o -L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib -L/opt/compilers/gcc-9.3.0/lib64/../lib64 -L/opt/compilers/gcc-9.3.0/lib/../lib64 -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0 -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/compilers/gcc-9.3.0/lib64 -L/opt/compilers/gcc-9.3.0/lib -L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib -L/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../.. pic.o MPI_bail_out.o wtime.o random_draw.o -lm -rpath /opt/tools/mpich-3.3.2-gcc-9.3.0/lib --enable-new-dtags -lmpi -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtfastmath.o /opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/crtend.o /lib/../lib64/crtn.o
+/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto-wrapper -fresolution=/tmp/ccRltsbh.res -flinker-output=exec pic.o MPI_bail_out.o wtime.o random_draw.o 
+gcc @/tmp/cc1QkTtw
+Using built-in specs.
+COLLECT_GCC=gcc
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COLLECT_GCC_OPTIONS='-c' '-fno-openmp' '-fno-openacc' '-fno-pie' '-O3' '-O3' '-mtune=native' '-ffast-math' '-g3' '-v' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64' '-dumpdir' './' '-dumpbase' 'pic.wpa' '-fltrans-output-list=/tmp/pic.jxXVLc.ltrans.out' '-fwpa' '-fresolution=/tmp/ccRltsbh.res' '-flinker-output=exec'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto1 --param l1-cache-size=48 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=generic -quiet -dumpdir ./ -dumpbase pic.wpa -march=x86-64 -auxbase pic -g3 -O3 -O3 -version -fno-openmp -fno-openacc -fno-pie -ffast-math -fltrans-output-list=/tmp/pic.jxXVLc.ltrans.out -fwpa -fresolution=/tmp/ccRltsbh.res -flinker-output=exec @/tmp/cctBYcoy
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/../lib64/:/lib/../lib64/../lib64/:/usr/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-fno-openmp' '-fno-openacc' '-fno-pie' '-O3' '-O3' '-mtune=native' '-ffast-math' '-g3' '-v' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64' '-dumpdir' './' '-dumpbase' 'pic.wpa' '-fltrans-output-list=/tmp/pic.jxXVLc.ltrans.out' '-fwpa' '-fresolution=/tmp/ccRltsbh.res' '-flinker-output=exec'
+gcc @/tmp/cchXZqAY
+Using built-in specs.
+COLLECT_GCC=gcc
+Target: x86_64-pc-linux-gnu
+Configured with: ./configure --prefix=/opt/compilers/gcc-9.3.0
+Thread model: posix
+gcc version 9.3.0 (GCC) 
+COLLECT_GCC_OPTIONS='-c' '-fno-openmp' '-fno-openacc' '-fno-pie' '-O3' '-O3' '-mtune=native' '-ffast-math' '-g3' '-v' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64' '-dumpdir' './' '-dumpbase' 'pic.ltrans0' '-fltrans' '-o' '/tmp/pic.jxXVLc.ltrans0.ltrans.o'
+ /opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/lto1 --param l1-cache-size=48 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=generic -quiet -dumpdir ./ -dumpbase pic.ltrans0 -march=x86-64 -auxbase-strip /tmp/pic.jxXVLc.ltrans0.ltrans.o -g3 -O3 -O3 -version -fno-openmp -fno-openacc -fno-pie -ffast-math -fltrans @/tmp/ccjNzDO9 -o /tmp/ccMQsuK1.s
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+GNU GIMPLE (GCC) version 9.3.0 (x86_64-pc-linux-gnu)
+	compiled by GNU C version 9.3.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version none
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+COLLECT_GCC_OPTIONS='-c' '-fno-openmp' '-fno-openacc' '-fno-pie' '-O3' '-O3' '-mtune=native' '-ffast-math' '-g3' '-v' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64' '-dumpdir' './' '-dumpbase' 'pic.ltrans0' '-fltrans' '-o' '/tmp/pic.jxXVLc.ltrans0.ltrans.o'
+ as -v --64 -o /tmp/pic.jxXVLc.ltrans0.ltrans.o /tmp/ccMQsuK1.s
+GNU assembler version 2.30 (x86_64-redhat-linux) using BFD version version 2.30-123.el8
+COMPILER_PATH=/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/libexec/gcc/x86_64-pc-linux-gnu/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/
+LIBRARY_PATH=/opt/compilers/gcc-9.3.0/lib64/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/../lib64/:/lib/../lib64/../lib64/:/usr/lib/../lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/../lib64/:/opt/compilers/gcc-9.3.0/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/compilers/gcc-9.3.0/lib64/:/opt/compilers/gcc-9.3.0/lib/:/opt/tools/mpich-3.3.2-gcc-9.3.0/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/:/opt/compilers/gcc-9.3.0/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-fno-openmp' '-fno-openacc' '-fno-pie' '-O3' '-O3' '-mtune=native' '-ffast-math' '-g3' '-v' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64' '-dumpdir' './' '-dumpbase' 'pic.ltrans0' '-fltrans' '-o' '/tmp/pic.jxXVLc.ltrans0.ltrans.o'
+COLLECT_GCC_OPTIONS='-o' 'pic' '-O3' '-mtune=native' '-ffast-math' '-g3' '-Wall' '-flto' '-D' 'MPI' '-v' '-I' '/opt/tools/mpich-3.3.2-gcc-9.3.0/include' '-L/opt/tools/mpich-3.3.2-gcc-9.3.0/lib' '-march=x86-64'

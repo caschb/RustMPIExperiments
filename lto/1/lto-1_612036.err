@@ -1,0 +1,442 @@
+### job=612036 nodes=1 ntasks=20 nodelist=kura-1d.cnca start=2026-09-07T15:48:59-06:00
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=0
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=0
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=0
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=0
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=0
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=0
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=0
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=0
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=0
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=0
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=1
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=1
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=1
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=1
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=1
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=1
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=1
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=1
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=1
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=1
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=1
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=1
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=1
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=1
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=1
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=1
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=2
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=2
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=2
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=2
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=2
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=2
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=2
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=2
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=2
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=2
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=2
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=2
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=2
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=2
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=2
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=2
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=3
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=3
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=3
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=3
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=3
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=3
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=3
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=3
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=3
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=3
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=3
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=3
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=3
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=3
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=3
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=3
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=4
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=4
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=4
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=4
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=4
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=4
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=4
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=4
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=4
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=4
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=4
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=4
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=4
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=4
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=4
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=4
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=5
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=5
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=5
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=5
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=5
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=5
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=5
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=5
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=5
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=5
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=5
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=5
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=5
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=5
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=5
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=5
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=6
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=6
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=6
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=6
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=6
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=6
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=6
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=6
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=6
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=6
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=6
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=6
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=6
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=6
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=6
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=6
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=7
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=7
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=7
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=7
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=7
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=7
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=7
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=7
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=7
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=7
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=7
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=7
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=7
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=7
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=7
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=7
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=8
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=8
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=8
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=8
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=8
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=8
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=8
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=8
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=8
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=8
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=8
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=8
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=8
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=8
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=8
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=8
+### code=pic lang=c lto=0 scaling=strong style=GEOMETRIC rep=9
+### code=pic lang=c lto=1 scaling=strong style=GEOMETRIC rep=9
+### code=pic lang=rust lto=0 scaling=strong style=GEOMETRIC rep=9
+### code=pic lang=rust lto=1 scaling=strong style=GEOMETRIC rep=9
+### code=pic lang=c lto=0 scaling=strong style=SINUSOIDAL rep=9
+### code=pic lang=c lto=1 scaling=strong style=SINUSOIDAL rep=9
+### code=pic lang=rust lto=0 scaling=strong style=SINUSOIDAL rep=9
+### code=pic lang=rust lto=1 scaling=strong style=SINUSOIDAL rep=9
+### code=pic lang=c lto=0 scaling=strong style=LINEAR rep=9
+### code=pic lang=c lto=1 scaling=strong style=LINEAR rep=9
+### code=pic lang=rust lto=0 scaling=strong style=LINEAR rep=9
+### code=pic lang=rust lto=1 scaling=strong style=LINEAR rep=9
+### code=pic lang=c lto=0 scaling=strong style=PATCH rep=9
+### code=pic lang=c lto=1 scaling=strong style=PATCH rep=9
+### code=pic lang=rust lto=0 scaling=strong style=PATCH rep=9
+### code=pic lang=rust lto=1 scaling=strong style=PATCH rep=9
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=0
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=0
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=0
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=0
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=0
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=0
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=0
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=0
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=0
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=0
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=0
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=0
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=0
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=0
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=0
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=1
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=1
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=1
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=1
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=1
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=1
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=1
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=1
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=1
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=1
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=1
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=1
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=1
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=1
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=1
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=1
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=2
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=2
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=2
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=2
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=2
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=2
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=2
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=2
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=2
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=2
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=2
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=2
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=2
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=2
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=2
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=2
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=3
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=3
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=3
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=3
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=3
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=3
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=3
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=3
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=3
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=3
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=3
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=3
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=3
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=3
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=3
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=3
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=4
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=4
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=4
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=4
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=4
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=4
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=4
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=4
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=4
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=4
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=4
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=4
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=4
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=4
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=4
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=4
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=5
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=5
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=5
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=5
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=5
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=5
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=5
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=5
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=5
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=5
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=5
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=5
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=5
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=5
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=5
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=5
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=6
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=6
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=6
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=6
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=6
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=6
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=6
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=6
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=6
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=6
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=6
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=6
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=6
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=6
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=6
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=6
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=7
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=7
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=7
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=7
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=7
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=7
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=7
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=7
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=7
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=7
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=7
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=7
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=7
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=7
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=7
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=7
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=8
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=8
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=8
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=8
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=8
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=8
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=8
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=8
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=8
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=8
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=8
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=8
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=8
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=8
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=8
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=8
+### code=pic lang=c lto=0 scaling=weak style=GEOMETRIC rep=9
+### code=pic lang=c lto=1 scaling=weak style=GEOMETRIC rep=9
+### code=pic lang=rust lto=0 scaling=weak style=GEOMETRIC rep=9
+### code=pic lang=rust lto=1 scaling=weak style=GEOMETRIC rep=9
+### code=pic lang=c lto=0 scaling=weak style=SINUSOIDAL rep=9
+### code=pic lang=c lto=1 scaling=weak style=SINUSOIDAL rep=9
+### code=pic lang=rust lto=0 scaling=weak style=SINUSOIDAL rep=9
+### code=pic lang=rust lto=1 scaling=weak style=SINUSOIDAL rep=9
+### code=pic lang=c lto=0 scaling=weak style=LINEAR rep=9
+### code=pic lang=c lto=1 scaling=weak style=LINEAR rep=9
+### code=pic lang=rust lto=0 scaling=weak style=LINEAR rep=9
+### code=pic lang=rust lto=1 scaling=weak style=LINEAR rep=9
+### code=pic lang=c lto=0 scaling=weak style=PATCH rep=9
+### code=pic lang=c lto=1 scaling=weak style=PATCH rep=9
+### code=pic lang=rust lto=0 scaling=weak style=PATCH rep=9
+### code=pic lang=rust lto=1 scaling=weak style=PATCH rep=9
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=0
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=0
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=0
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203600
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T22:28:24Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T22:36:20Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T22:36:20Z INFO  bs_solctra_rs] Simulation time: 476.35382604599
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=0
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203610
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T22:36:21Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T22:44:17Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T22:44:17Z INFO  bs_solctra_rs] Simulation time: 476.63352704048157
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=1
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=1
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=1
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203601
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T23:00:18Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T23:08:14Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T23:08:14Z INFO  bs_solctra_rs] Simulation time: 476.3633043766022
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=1
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203611
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T23:08:15Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T23:16:11Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T23:16:11Z INFO  bs_solctra_rs] Simulation time: 476.3933479785919
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=2
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=2
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=2
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203602
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T23:32:13Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T23:40:09Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T23:40:09Z INFO  bs_solctra_rs] Simulation time: 476.3372609615326
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=2
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203612
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-07T23:40:10Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-07T23:48:06Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-07T23:48:06Z INFO  bs_solctra_rs] Simulation time: 476.3097445964813
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=3
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=3
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=3
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203603
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-08T00:04:07Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Simulation time: 476.4019591808319
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=3
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203613
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-08T00:12:04Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-08T00:20:00Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-08T00:20:00Z INFO  bs_solctra_rs] Simulation time: 476.2654609680176
+### code=solctra lang=c lto=0 scaling=strong style=NA rep=4
+### code=solctra lang=c lto=1 scaling=strong style=NA rep=4
+### code=solctra lang=rust lto=0 scaling=strong style=NA rep=4
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203604
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-08T00:36:01Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-08T00:43:57Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-08T00:43:57Z INFO  bs_solctra_rs] Simulation time: 476.24702882766724
+### code=solctra lang=rust lto=1 scaling=strong style=NA rep=4
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Starting BS-Solctra
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Total ranks: 1
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs::utils] Creating path: results_rs61203614
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Reading particles from file input_big.csv
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Reading coil data from directory: resources-rs/
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Computing displacements
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Computing e_roof
+[2026-09-08T00:43:58Z INFO  bs_solctra_rs] Computing simulation
+[2026-09-08T00:51:54Z INFO  bs_solctra_rs] Finished simulation
+[2026-09-08T00:51:54Z INFO  bs_solctra_rs] Simulation time: 476.4325325489044
+### end=2026-09-07T18:51:54-06:00
